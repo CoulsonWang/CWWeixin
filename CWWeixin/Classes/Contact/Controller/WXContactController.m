@@ -7,10 +7,11 @@
 //
 
 #import "WXContactController.h"
+#import "WXContactCell.h"
 
 static NSString *const cellID = @"ContactCellID";
 
-@interface WXContactController ()
+@interface WXContactController () <EMChatManagerDelegate>
 
 @property (strong,nonatomic) NSMutableArray *friendsList;
 
@@ -26,7 +27,6 @@ static NSString *const cellID = @"ContactCellID";
             [_friendsList addObjectsFromArray:buddies];
         }
     }
-    
     return _friendsList;
 }
 
@@ -35,7 +35,11 @@ static NSString *const cellID = @"ContactCellID";
     
     self.title = @"通讯录";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"contacts_add_friend"] style:UIBarButtonItemStylePlain target:self action:@selector(addFriendButtonClick)];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellID];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXContactCell class]) bundle:nil] forCellReuseIdentifier:cellID];
+    self.tableView.rowHeight = 50;
+    
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
 }
 
 
@@ -65,19 +69,38 @@ static NSString *const cellID = @"ContactCellID";
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
-#pragma mark - TableViewDelegate 
+#pragma mark - 监听好友列表改变
+
+- (void)didUpdateBuddyList:(NSArray *)buddyList changedBuddies:(NSArray *)changedBuddies isAdd:(BOOL)isAdd {
+    [self.friendsList removeAllObjects];
+    [self.friendsList addObjectsFromArray:buddyList];
+    [self.tableView reloadData];
+}
+
+#pragma mark - TableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.friendsList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    WXContactCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     
     EMBuddy *buddy = self.friendsList[indexPath.row];
-    cell.textLabel.text = buddy.username;
+    cell.buddy = buddy;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        EMBuddy *buddy = self.friendsList[indexPath.row];
+        EMError *error = nil;
+        [[EaseMob sharedInstance].chatManager removeBuddy:buddy.username removeFromRemote:YES error:&error];
+        if (!error) {
+            NSLog(@"删除成功");
+        }
+    }
 }
 
 @end
