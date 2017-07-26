@@ -21,7 +21,7 @@
     [self.navigationBar cw_setBackgroundColor:[UIColor blackColor]];
     self.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                 NSFontAttributeName: [UIFont boldSystemFontOfSize:24]}];
+                                                 NSFontAttributeName: [UIFont boldSystemFontOfSize:20]}];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

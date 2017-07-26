@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  CWWeixin
+//
+//  Created by Coulson_Wang on 2017/7/26.
+//  Copyright © 2017年 Coulson_Wang. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <EaseMob.h>
+
+#define MainStoryBoard [UIStoryboard storyboardWithName:@"Main" bundle:nil]
+
+#endif /* PrefixHeader_pch */

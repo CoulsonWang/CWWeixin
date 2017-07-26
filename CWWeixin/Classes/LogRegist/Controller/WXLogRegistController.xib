@@ -1,20 +1,106 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXLogRegistController">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="passwordTF" destination="ckq-du-T4N" id="a8G-aU-F7w"/>
+                <outlet property="userNameTF" destination="AvP-ZK-9sk" id="c8r-ha-uzo"/>
+                <outlet property="view" destination="9DW-gC-uWI" id="lo5-ud-Thj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="9DW-gC-uWI">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zED-23-kaT">
+                    <rect key="frame" x="36" y="150" width="343" height="47"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="用户名:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4E-a4-TCu">
+                            <rect key="frame" x="8" y="13" width="57" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AvP-ZK-9sk">
+                            <rect key="frame" x="73" y="0.0" width="262" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="343" id="CFS-WR-qWU"/>
+                        <constraint firstAttribute="height" constant="47" id="fey-rt-4LA"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tq-QL-4NZ">
+                    <rect key="frame" x="36" y="207" width="343" height="47"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密码:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7P-0t-oM4">
+                            <rect key="frame" x="8" y="13" width="40" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ckq-du-T4N">
+                            <rect key="frame" x="56" y="0.0" width="279" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLT-dg-hEd">
+                    <rect key="frame" x="36.333333333333343" y="274" width="343" height="44"/>
+                    <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="P6z-yw-QlB"/>
+                    </constraints>
+                    <state key="normal" title="测试注册"/>
+                    <connections>
+                        <action selector="registButtonClick:" destination="-1" eventType="touchUpInside" id="24k-L8-TF4"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhv-vg-tiG">
+                    <rect key="frame" x="36" y="328" width="343" height="44"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="登录"/>
+                    <connections>
+                        <action selector="loginButtonClick:" destination="-1" eventType="touchUpInside" id="BMY-5F-s29"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="2tq-QL-4NZ" firstAttribute="height" secondItem="zED-23-kaT" secondAttribute="height" id="99T-iM-OYT"/>
+                <constraint firstItem="Yhv-vg-tiG" firstAttribute="width" secondItem="XLT-dg-hEd" secondAttribute="width" id="9tB-2D-e8K"/>
+                <constraint firstItem="2tq-QL-4NZ" firstAttribute="top" secondItem="zED-23-kaT" secondAttribute="bottom" constant="10" id="BVN-0P-Ppe"/>
+                <constraint firstItem="zED-23-kaT" firstAttribute="centerX" secondItem="9DW-gC-uWI" secondAttribute="centerX" id="D2L-zC-JAn"/>
+                <constraint firstItem="XLT-dg-hEd" firstAttribute="width" secondItem="2tq-QL-4NZ" secondAttribute="width" id="Fer-KW-Byp"/>
+                <constraint firstItem="Yhv-vg-tiG" firstAttribute="centerX" secondItem="9DW-gC-uWI" secondAttribute="centerX" id="FtP-n2-KlW"/>
+                <constraint firstItem="2tq-QL-4NZ" firstAttribute="centerX" secondItem="9DW-gC-uWI" secondAttribute="centerX" id="Ggv-Sc-921"/>
+                <constraint firstItem="zED-23-kaT" firstAttribute="top" secondItem="9DW-gC-uWI" secondAttribute="top" constant="150" id="JrG-Vs-Oox"/>
+                <constraint firstItem="Yhv-vg-tiG" firstAttribute="top" secondItem="XLT-dg-hEd" secondAttribute="bottom" constant="10" id="T86-e1-A8I"/>
+                <constraint firstItem="XLT-dg-hEd" firstAttribute="top" secondItem="2tq-QL-4NZ" secondAttribute="bottom" constant="20" id="bCt-jX-Dze"/>
+                <constraint firstItem="Yhv-vg-tiG" firstAttribute="height" secondItem="XLT-dg-hEd" secondAttribute="height" id="cyU-77-bkW"/>
+                <constraint firstItem="2tq-QL-4NZ" firstAttribute="width" secondItem="zED-23-kaT" secondAttribute="width" id="f8z-vH-TL1"/>
+                <constraint firstItem="XLT-dg-hEd" firstAttribute="centerX" secondItem="9DW-gC-uWI" secondAttribute="centerX" id="jpZ-5R-X6P"/>
+            </constraints>
         </view>
     </objects>
 </document>

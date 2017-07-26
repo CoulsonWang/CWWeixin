@@ -18,6 +18,8 @@
 		B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EE02321F287302002F3075 /* WXLogRegistController.xib */; };
 		B9EE023B1F287374002F3075 /* WXNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE023A1F287374002F3075 /* WXNavigationController.m */; };
 		B9EE023E1F287612002F3075 /* UINavigationBar+WXBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE023D1F287612002F3075 /* UINavigationBar+WXBackground.m */; };
+		B9EE02421F288308002F3075 /* WXMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02411F288308002F3075 /* WXMeController.m */; };
+		B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02441F28870C002F3075 /* WXMeSettingController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,11 @@
 		B9EE023A1F287374002F3075 /* WXNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXNavigationController.m; sourceTree = "<group>"; };
 		B9EE023C1F287612002F3075 /* UINavigationBar+WXBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+WXBackground.h"; sourceTree = "<group>"; };
 		B9EE023D1F287612002F3075 /* UINavigationBar+WXBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+WXBackground.m"; sourceTree = "<group>"; };
+		B9EE023F1F287AD5002F3075 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B9EE02401F288308002F3075 /* WXMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMeController.h; sourceTree = "<group>"; };
+		B9EE02411F288308002F3075 /* WXMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeController.m; sourceTree = "<group>"; };
+		B9EE02431F28870C002F3075 /* WXMeSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMeSettingController.h; sourceTree = "<group>"; };
+		B9EE02441F28870C002F3075 /* WXMeSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeSettingController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +273,10 @@
 		B9752F4B1F279D8500316148 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B9EE02401F288308002F3075 /* WXMeController.h */,
+				B9EE02411F288308002F3075 /* WXMeController.m */,
+				B9EE02431F28870C002F3075 /* WXMeSettingController.h */,
+				B9EE02441F28870C002F3075 /* WXMeSettingController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,6 +329,7 @@
 				B9EE02271F2870F9002F3075 /* Category */,
 				B9EE02281F2870F9002F3075 /* Const */,
 				B9EE02291F2870F9002F3075 /* Lib */,
+				B9EE023F1F287AD5002F3075 /* PrefixHeader.pch */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -530,7 +542,9 @@
 				B9EE023B1F287374002F3075 /* WXNavigationController.m in Sources */,
 				B9752F511F279D8500316148 /* AppDelegate.m in Sources */,
 				B9EE023E1F287612002F3075 /* UINavigationBar+WXBackground.m in Sources */,
+				B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,
+				B9EE02421F288308002F3075 /* WXMeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +666,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = CWWeixin/Classes/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = CWWeixin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -666,6 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = CWWeixin/Classes/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = CWWeixin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

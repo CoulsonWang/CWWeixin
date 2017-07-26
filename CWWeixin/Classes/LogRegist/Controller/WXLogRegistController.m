@@ -9,6 +9,8 @@
 #import "WXLogRegistController.h"
 
 @interface WXLogRegistController ()
+@property (weak, nonatomic) IBOutlet UITextField *userNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 
 @end
 
@@ -16,22 +18,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    NSString *lastUserName = [[NSUserDefaults standardUserDefaults] valueForKey:@"username"];
+    self.userNameTF.text = lastUserName;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)registButtonClick:(UIButton *)sender {
+    [[EaseMob sharedInstance].chatManager asyncRegisterNewAccount:self.userNameTF.text password:self.passwordTF.text withCompletion:^(NSString *username, NSString *password, EMError *error) {
+        if (!error) {
+            NSLog(@"注册成功");
+        } else {
+            NSLog(@"注册失败,失败信息：%@",error);
+        }
+    } onQueue:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)loginButtonClick:(UIButton *)sender {
+    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userNameTF.text password:self.passwordTF.text completion:^(NSDictionary *loginInfo, EMError *error) {
+        if (!error && loginInfo) {
+            NSLog(@"登陆成功");
+            [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
+            UIApplication.sharedApplication.keyWindow.rootViewController = MainStoryBoard.instantiateInitialViewController;
+        } else {
+            NSLog(@"登录失败");
+        }
+    } onQueue:nil];
 }
-*/
+
 
 @end
