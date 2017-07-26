@@ -21,6 +21,7 @@
 		B9EE02421F288308002F3075 /* WXMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02411F288308002F3075 /* WXMeController.m */; };
 		B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02441F28870C002F3075 /* WXMeSettingController.m */; };
 		B9EE02491F289B38002F3075 /* WXChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02481F289B38002F3075 /* WXChatController.m */; };
+		B9EE024C1F28A454002F3075 /* WXContactController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE024B1F28A454002F3075 /* WXContactController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,8 @@
 		B9EE02441F28870C002F3075 /* WXMeSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeSettingController.m; sourceTree = "<group>"; };
 		B9EE02471F289B38002F3075 /* WXChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatController.h; sourceTree = "<group>"; };
 		B9EE02481F289B38002F3075 /* WXChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatController.m; sourceTree = "<group>"; };
+		B9EE024A1F28A454002F3075 /* WXContactController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXContactController.h; sourceTree = "<group>"; };
+		B9EE024B1F28A454002F3075 /* WXContactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXContactController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 		B9752F3B1F279D8500316148 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B9EE024A1F28A454002F3075 /* WXContactController.h */,
+				B9EE024B1F28A454002F3075 /* WXContactController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 				B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,
 				B9EE02421F288308002F3075 /* WXMeController.m in Sources */,
+				B9EE024C1F28A454002F3075 /* WXContactController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
