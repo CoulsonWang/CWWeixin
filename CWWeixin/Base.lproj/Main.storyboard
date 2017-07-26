@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,7 +50,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Q1e-te-r6t">
             <objects>
-                <tabBarController id="dzy-pj-q4A" sceneMemberID="viewController">
+                <tabBarController id="dzy-pj-q4A" customClass="WXTabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OyL-7M-31o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -66,11 +67,11 @@
             </objects>
             <point key="canvasLocation" x="-351" y="535"/>
         </scene>
-        <!--Item 1-->
+        <!--微信-->
         <scene sceneID="elK-21-zRS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fYa-T9-B4z" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="vf8-Jz-Zdp"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fYa-T9-B4z" customClass="WXNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="微信" image="tabbar_mainframe" selectedImage="tabbar_mainframeHL" id="vf8-Jz-Zdp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2fo-sZ-h6d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -85,11 +86,11 @@
             </objects>
             <point key="canvasLocation" x="716" y="-516.79160419790105"/>
         </scene>
-        <!--Item 2-->
+        <!--通讯录-->
         <scene sceneID="394-p2-6Ty">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aTQ-Ia-oO7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="TYU-o4-VqG"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aTQ-Ia-oO7" customClass="WXNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="通讯录" image="tabbar_contacts" selectedImage="tabbar_contactsHL" id="TYU-o4-VqG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qfA-1Y-pjM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -142,11 +143,11 @@
             </objects>
             <point key="canvasLocation" x="1666" y="1515"/>
         </scene>
-        <!--Item-->
+        <!--我-->
         <scene sceneID="wri-1J-feI">
             <objects>
-                <navigationController id="gIx-oX-V0M" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="PhC-VP-hFa"/>
+                <navigationController id="gIx-oX-V0M" customClass="WXNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我" image="tabbar_me" selectedImage="tabbar_meHL" id="PhC-VP-hFa"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7HF-iF-Qk6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -159,11 +160,11 @@
             </objects>
             <point key="canvasLocation" x="716" y="1515"/>
         </scene>
-        <!--Item-->
+        <!--发现-->
         <scene sceneID="Gyn-LO-LU8">
             <objects>
-                <navigationController id="Qyy-RW-crx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Brr-5Z-zZo"/>
+                <navigationController id="Qyy-RW-crx" customClass="WXNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="发现" image="tabbar_discover" selectedImage="tabbar_discoverHL" id="Brr-5Z-zZo"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMm-3b-IZ8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -177,4 +178,14 @@
             <point key="canvasLocation" x="716" y="824"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabbar_contacts" width="27" height="23"/>
+        <image name="tabbar_contactsHL" width="27" height="23"/>
+        <image name="tabbar_discover" width="23" height="23"/>
+        <image name="tabbar_discoverHL" width="23" height="23"/>
+        <image name="tabbar_mainframe" width="25" height="23"/>
+        <image name="tabbar_mainframeHL" width="25" height="23"/>
+        <image name="tabbar_me" width="23" height="23"/>
+        <image name="tabbar_meHL" width="23" height="23"/>
+    </resources>
 </document>
