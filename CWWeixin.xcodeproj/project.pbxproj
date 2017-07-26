@@ -20,6 +20,7 @@
 		B9EE023E1F287612002F3075 /* UINavigationBar+WXBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE023D1F287612002F3075 /* UINavigationBar+WXBackground.m */; };
 		B9EE02421F288308002F3075 /* WXMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02411F288308002F3075 /* WXMeController.m */; };
 		B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02441F28870C002F3075 /* WXMeSettingController.m */; };
+		B9EE02491F289B38002F3075 /* WXChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02481F289B38002F3075 /* WXChatController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,8 @@
 		B9EE02411F288308002F3075 /* WXMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeController.m; sourceTree = "<group>"; };
 		B9EE02431F28870C002F3075 /* WXMeSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMeSettingController.h; sourceTree = "<group>"; };
 		B9EE02441F28870C002F3075 /* WXMeSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMeSettingController.m; sourceTree = "<group>"; };
+		B9EE02471F289B38002F3075 /* WXChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatController.h; sourceTree = "<group>"; };
+		B9EE02481F289B38002F3075 /* WXChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 		B9752F371F279D8500316148 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B9EE02471F289B38002F3075 /* WXChatController.h */,
+				B9EE02481F289B38002F3075 /* WXChatController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -538,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */,
+				B9EE02491F289B38002F3075 /* WXChatController.m in Sources */,
 				B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */,
 				B9EE023B1F287374002F3075 /* WXNavigationController.m in Sources */,
 				B9752F511F279D8500316148 /* AppDelegate.m in Sources */,
