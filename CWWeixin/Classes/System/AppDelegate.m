@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "WXLogRegistController.h"
+#import <SVProgressHUD.h>
 
 #define kEaseMobKey @"1110170725178017#suibiantian"
 
@@ -27,14 +28,11 @@
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UIViewController *rootVC;
+    self.window.rootViewController = [[WXLogRegistController alloc] init];
     if ([EaseMob sharedInstance].chatManager.isAutoLoginEnabled) {
-        rootVC = MainStoryBoard.instantiateInitialViewController;
-        
-    } else {
-        rootVC = [[WXLogRegistController alloc] init];
+        [SVProgressHUD showWithStatus:@"正在自动登录..."];
     }
-    self.window.rootViewController = rootVC;
+    
     
     [self.window makeKeyAndVisible];
     
@@ -76,6 +74,15 @@
 }
 
 #pragma mark - EMChatManagerDelegate 
+
+- (void)didAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error {
+    [SVProgressHUD dismiss];
+    if (error) {
+        [SVProgressHUD showErrorWithStatus:@"登录失败！"];
+    } else {
+        self.window.rootViewController = MainStoryBoard.instantiateInitialViewController;
+    }
+}
 
 - (void)didRemovedFromServer {
     [self passiveLogout];
