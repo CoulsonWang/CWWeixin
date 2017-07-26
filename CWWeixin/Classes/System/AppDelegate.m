@@ -77,7 +77,21 @@
 
 #pragma mark - EMChatManagerDelegate 
 
+- (void)didRemovedFromServer {
+    [self passiveLogout];
+}
 
+- (void)didLoginFromOtherDevice {
+    [self passiveLogout];
+}
 
+- (void)passiveLogout {
+    [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:NO completion:^(NSDictionary *info, EMError *error) {
+        if (!error) {
+            UIApplication.sharedApplication.keyWindow.rootViewController = [[WXLogRegistController alloc] init];
+        }
+        
+    } onQueue:nil];
+}
 
 @end

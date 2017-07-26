@@ -7,6 +7,7 @@
 //
 
 #import "WXLogRegistController.h"
+#import <SVProgressHUD.h>
 
 @interface WXLogRegistController ()
 @property (weak, nonatomic) IBOutlet UITextField *userNameTF;
@@ -24,25 +25,32 @@
 }
 
 - (IBAction)registButtonClick:(UIButton *)sender {
+    [SVProgressHUD showWithStatus:@"正在注册..."];
     [[EaseMob sharedInstance].chatManager asyncRegisterNewAccount:self.userNameTF.text password:self.passwordTF.text withCompletion:^(NSString *username, NSString *password, EMError *error) {
+        [SVProgressHUD dismiss];
         if (!error) {
-            NSLog(@"注册成功");
+            [SVProgressHUD showSuccessWithStatus:@"注册成功!"];
         } else {
-            NSLog(@"注册失败,失败信息：%@",error);
+            [SVProgressHUD showErrorWithStatus:@"注册失败!"];
         }
     } onQueue:nil];
 }
 
 - (IBAction)loginButtonClick:(UIButton *)sender {
+    [SVProgressHUD showWithStatus:@"登录中..."];
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userNameTF.text password:self.passwordTF.text completion:^(NSDictionary *loginInfo, EMError *error) {
+        [SVProgressHUD dismiss];
         if (!error && loginInfo) {
-            NSLog(@"登陆成功");
             [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
             UIApplication.sharedApplication.keyWindow.rootViewController = MainStoryBoard.instantiateInitialViewController;
         } else {
-            NSLog(@"登录失败");
+            [SVProgressHUD showErrorWithStatus:@"登录失败!"];
         }
     } onQueue:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [SVProgressHUD dismiss];
 }
 
 
