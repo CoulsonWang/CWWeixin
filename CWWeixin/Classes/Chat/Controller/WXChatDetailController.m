@@ -13,11 +13,13 @@
 
 static NSString *const cellID = @"cellID";
 
-@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate>
+@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) UITableView *chatTableView;
 
 @property (weak, nonatomic) WXInputView *inputView;
+
+@property (strong, nonatomic) NSMutableArray *chatMsgs;
 
 @end
 
@@ -27,8 +29,8 @@ static NSString *const cellID = @"cellID";
 - (UIView *)inputView {
     if (!_inputView) {
         WXInputView *inputView = [WXInputView inputView];
-        
         inputView.frame = CGRectMake(0, CWScreenH - kInputViewHeight, CWScreenW, kInputViewHeight);
+        inputView.textField.delegate = self;
         [self.view addSubview:inputView];
         
         _inputView = inputView;
@@ -49,14 +51,46 @@ static NSString *const cellID = @"cellID";
     return _chatTableView;
 }
 
+- (NSMutableArray *)chatMsgs {
+    if (!_chatMsgs) {
+        _chatMsgs = [NSMutableArray array];
+    }
+    return _chatMsgs;
+}
+
+#pragma mark - setter
+- (void)setBuddy:(EMBuddy *)buddy {
+    _buddy = buddy;
+    self.title = buddy.username;
+}
+
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.chatTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellID];
     self.inputView.tag = 1;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_me"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItem)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_me"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
     
+    [self setUpNotification];
+    
+    [self loadChatMessages];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self scrollTheTableView];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+#pragma mark - 私有方法
+- (void)rightBarButtonItemClick {
+    // do something
+}
+
+- (void)setUpNotification {
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillChangeFrameNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         NSTimeInterval duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGFloat endY = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
@@ -65,28 +99,68 @@ static NSString *const cellID = @"cellID";
             self.chatTableView.frame = CGRectMake(0, 0, CWScreenW, inputY);
             self.inputView.frame = CGRectMake(0, inputY, CWScreenW, kInputViewHeight);
         }];
-        [self.chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:14 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self scrollTheTableView];
     }];
+
 }
 
-- (void)rightBarButtonItemClick {
-    // do something
+- (void)loadChatMessages {
+    [self.chatMsgs removeAllObjects];
+    EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.buddy.username conversationType:eConversationTypeChat];
+    NSArray *msgs = [conversation loadAllMessages];
+    [self.chatMsgs addObjectsFromArray:msgs];
+    
+    [self.chatTableView reloadData];
+    [self scrollTheTableView];
 }
 
-#pragma mark - UITableViewDelegate 
+- (void)scrollTheTableView {
+    if (self.chatMsgs.count != 0) {
+        NSIndexPath *index = [NSIndexPath indexPathForRow:self.chatMsgs.count - 1  inSection:0];
+        [self.chatTableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+    }
+}
+
+#pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    return self.chatMsgs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"第%ld行",indexPath.row];
+    EMMessage *msg = self.chatMsgs[indexPath.row];
+    EMTextMessageBody *body = msg.messageBodies.firstObject;
+    
+    cell.textLabel.text = body.text;
     return cell;
 }
 
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    EMChatText *text = [[EMChatText alloc] initWithText:textField.text];
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:text];
+    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
+    
+    [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
+        
+    } onQueue:nil completion:^(EMMessage *message, EMError *error) {
+        if (!error) {
+            textField.text = nil;
+            [textField resignFirstResponder];
+            [self loadChatMessages];
+        }
+        
+    } onQueue:nil];
+    
+    return YES;
 }
 
 

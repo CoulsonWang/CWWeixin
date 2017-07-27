@@ -10,4 +10,6 @@
 
 @interface WXChatDetailController : UIViewController
 
+@property (strong, nonatomic) EMBuddy *buddy;
+
 @end

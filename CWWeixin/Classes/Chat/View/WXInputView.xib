@@ -26,7 +26,7 @@
                     <rect key="frame" x="38" y="5" width="413" height="34"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owf-2M-5oS">
                     <rect key="frame" x="454" y="6" width="35" height="35"/>
@@ -71,6 +71,9 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="textField" destination="axz-yM-cue" id="KK6-9u-sYl"/>
+            </connections>
             <point key="canvasLocation" x="58" y="304.5"/>
         </view>
     </objects>

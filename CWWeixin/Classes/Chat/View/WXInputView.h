@@ -10,6 +10,8 @@
 
 @interface WXInputView : UIView
 
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 + (instancetype)inputView;
 
 @end
