@@ -13,6 +13,9 @@
 		B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0D1F2789C700316148 /* Assets.xcassets */; };
 		B9752F111F2789C700316148 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0F1F2789C700316148 /* LaunchScreen.storyboard */; };
 		B9752F511F279D8500316148 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9752F501F279D8500316148 /* AppDelegate.m */; };
+		B97CDAB11F29C548004D2185 /* WXContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB01F29C548004D2185 /* WXContactDetailController.m */; };
+		B97CDAB31F29C555004D2185 /* WXContactDetailController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B97CDAB21F29C555004D2185 /* WXContactDetailController.storyboard */; };
+		B97CDAB61F29C85E004D2185 /* UIImage+WXCreateColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */; };
 		B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE022E1F287144002F3075 /* WXTabBarController.m */; };
 		B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02311F287302002F3075 /* WXLogRegistController.m */; };
 		B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EE02321F287302002F3075 /* WXLogRegistController.xib */; };
@@ -38,6 +41,11 @@
 		B9752F121F2789C700316148 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9752F4F1F279D8500316148 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9752F501F279D8500316148 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B97CDAAF1F29C548004D2185 /* WXContactDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXContactDetailController.h; sourceTree = "<group>"; };
+		B97CDAB01F29C548004D2185 /* WXContactDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXContactDetailController.m; sourceTree = "<group>"; };
+		B97CDAB21F29C555004D2185 /* WXContactDetailController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WXContactDetailController.storyboard; sourceTree = "<group>"; };
+		B97CDAB41F29C85E004D2185 /* UIImage+WXCreateColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WXCreateColorImage.h"; sourceTree = "<group>"; };
+		B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WXCreateColorImage.m"; sourceTree = "<group>"; };
 		B9EE022D1F287144002F3075 /* WXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTabBarController.h; sourceTree = "<group>"; };
 		B9EE022E1F287144002F3075 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
 		B9EE02301F287302002F3075 /* WXLogRegistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLogRegistController.h; sourceTree = "<group>"; };
@@ -192,6 +200,9 @@
 			children = (
 				B9EE024A1F28A454002F3075 /* WXContactController.h */,
 				B9EE024B1F28A454002F3075 /* WXContactController.m */,
+				B97CDAAF1F29C548004D2185 /* WXContactDetailController.h */,
+				B97CDAB01F29C548004D2185 /* WXContactDetailController.m */,
+				B97CDAB21F29C555004D2185 /* WXContactDetailController.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -357,6 +368,8 @@
 			children = (
 				B9EE023C1F287612002F3075 /* UINavigationBar+WXBackground.h */,
 				B9EE023D1F287612002F3075 /* UINavigationBar+WXBackground.m */,
+				B97CDAB41F29C85E004D2185 /* UIImage+WXCreateColorImage.h */,
+				B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -499,6 +512,7 @@
 				B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */,
 				B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */,
 				B9752F0C1F2789C700316148 /* Main.storyboard in Resources */,
+				B97CDAB31F29C555004D2185 /* WXContactDetailController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +579,9 @@
 				B9EE02501F28DBE6002F3075 /* WXContactCell.m in Sources */,
 				B9EE023E1F287612002F3075 /* UINavigationBar+WXBackground.m in Sources */,
 				B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */,
+				B97CDAB11F29C548004D2185 /* WXContactDetailController.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,
+				B97CDAB61F29C85E004D2185 /* UIImage+WXCreateColorImage.m in Sources */,
 				B9EE02421F288308002F3075 /* WXMeController.m in Sources */,
 				B9EE024C1F28A454002F3075 /* WXContactController.m in Sources */,
 			);

@@ -49,7 +49,7 @@ typedef enum : NSUInteger {
 - (void)changeContactBadgeValue:(WXTabBarBadgeValueChangeMode)changeMode {
     UINavigationController *contactNavVC = self.viewControllers[1];
     NSString *badgeValue = contactNavVC.tabBarItem.badgeValue;
-    NSInteger badgeNum = badgeValue.integerValue;
+    NSUInteger badgeNum = badgeValue.integerValue;
     switch (changeMode) {
         case WXTabBarBadgeValuePlusOne:
             badgeNum++;
@@ -66,7 +66,7 @@ typedef enum : NSUInteger {
     if (badgeNum == 0) {
         contactNavVC.tabBarItem.badgeValue = nil;
     } else {
-        contactNavVC.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld",badgeNum];
+        contactNavVC.tabBarItem.badgeValue = [NSString stringWithFormat:@"%lu",(unsigned long)badgeNum];
     }
     
 }

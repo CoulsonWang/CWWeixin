@@ -15,17 +15,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.666666666666664"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6de-mn-1p2">
-                        <rect key="frame" x="8" y="8" width="30" height="28"/>
+                        <rect key="frame" x="20" y="8" width="34" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="zLW-RN-D5d"/>
+                            <constraint firstAttribute="width" constant="34" id="zLW-RN-D5d"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcF-3q-j61">
-                        <rect key="frame" x="46" y="11" width="42" height="21"/>
+                        <rect key="frame" x="62" y="11" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -35,11 +35,11 @@
                     <constraint firstItem="OcF-3q-j61" firstAttribute="leading" secondItem="6de-mn-1p2" secondAttribute="trailing" constant="8" id="Kav-oh-DrA"/>
                     <constraint firstAttribute="bottom" secondItem="6de-mn-1p2" secondAttribute="bottom" constant="8" id="QgP-fH-UPA"/>
                     <constraint firstItem="6de-mn-1p2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="tyX-u0-jRS"/>
-                    <constraint firstItem="6de-mn-1p2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="vOY-3O-2hF"/>
+                    <constraint firstItem="6de-mn-1p2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vOY-3O-2hF"/>
                     <constraint firstItem="OcF-3q-j61" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="w4u-Bj-KNH"/>
                 </constraints>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
             <connections>
                 <outlet property="userIconImageView" destination="6de-mn-1p2" id="xIo-sH-Rvh"/>
                 <outlet property="userNameLabel" destination="OcF-3q-j61" id="Yc6-jW-O53"/>

@@ -8,6 +8,7 @@
 
 #import "WXContactController.h"
 #import "WXContactCell.h"
+#import "WXContactDetailController.h"
 
 static NSString *const cellID = @"ContactCellID";
 
@@ -101,6 +102,15 @@ static NSString *const cellID = @"ContactCellID";
             NSLog(@"删除成功");
         }
     }
+}
+
+#pragma mark - UITableViewDelegate 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    EMBuddy *buddy = self.friendsList[indexPath.row];
+    WXContactDetailController *contactDetailVC = [WXContactDetailController contactDetailVC];
+    contactDetailVC.buddy = buddy;
+    
+    [self.navigationController pushViewController:contactDetailVC animated:YES];
 }
 
 @end
