@@ -1,5 +1,5 @@
 //
-//  UIImage+WXCreateColorImage.h
+//  WXChatCell.h
 //  CWWeixin
 //
 //  Created by Coulson_Wang on 2017/7/27.
@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (WXCreateColorImage)
+@class WXChatFrame;
 
-+ (instancetype)imageWithColor:(UIColor *)color;
+@interface WXChatCell : UITableViewCell
 
-- (instancetype)imageWithStretch;
+@property (strong, nonatomic) WXChatFrame *chatFrame;
 
 @end

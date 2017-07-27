@@ -22,4 +22,13 @@
     return image;
 }
 
+- (instancetype)imageWithStretch {
+    CGFloat top = self.size.height * 0.5;
+    CGFloat left = self.size.width * 0.5;
+    CGFloat bottom = self.size.height - top - 1;
+    CGFloat right = self.size.width - left - 1;
+
+    return [self resizableImageWithCapInsets:UIEdgeInsetsMake(top, left, bottom, right)];
+}
+
 @end

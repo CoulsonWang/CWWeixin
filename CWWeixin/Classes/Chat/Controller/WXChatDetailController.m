@@ -8,6 +8,9 @@
 
 #import "WXChatDetailController.h"
 #import "WXInputView.h"
+#import "WXChatCell.h"
+#import "WXChatItem.h"
+#import "WXChatFrame.h"
 
 #define kInputViewHeight 44.0
 
@@ -19,7 +22,7 @@ static NSString *const cellID = @"cellID";
 
 @property (weak, nonatomic) WXInputView *inputView;
 
-@property (strong, nonatomic) NSMutableArray *chatMsgs;
+@property (strong, nonatomic) NSMutableArray<WXChatFrame *> *chatMsgs;
 
 @end
 
@@ -68,10 +71,16 @@ static NSString *const cellID = @"cellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.chatTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellID];
+    [self.chatTableView registerClass:[WXChatCell class] forCellReuseIdentifier:cellID];
+    self.chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.chatTableView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
+    self.chatTableView.allowsSelection = NO;
+    
+    
     self.inputView.tag = 1;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_me"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
+    
     
     [self setUpNotification];
     
@@ -108,7 +117,14 @@ static NSString *const cellID = @"cellID";
     [self.chatMsgs removeAllObjects];
     EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.buddy.username conversationType:eConversationTypeChat];
     NSArray *msgs = [conversation loadAllMessages];
-    [self.chatMsgs addObjectsFromArray:msgs];
+    for (EMMessage *msg in msgs) {
+        WXChatItem *item = [[WXChatItem alloc] init];
+        item.message = msg;
+        WXChatFrame *chatFrame = [[WXChatFrame alloc] init];
+        chatFrame.item = item;
+        
+        [self.chatMsgs addObject:chatFrame];
+    }
     
     [self.chatTableView reloadData];
     [self scrollTheTableView];
@@ -122,19 +138,24 @@ static NSString *const cellID = @"cellID";
     }
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.chatMsgs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    WXChatCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     
-    EMMessage *msg = self.chatMsgs[indexPath.row];
-    EMTextMessageBody *body = msg.messageBodies.firstObject;
+    WXChatFrame *chatFrame = self.chatMsgs[indexPath.row];
     
-    cell.textLabel.text = body.text;
+    cell.chatFrame = chatFrame;
+    
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WXChatFrame *chatFrame = self.chatMsgs[indexPath.row];
+    return chatFrame.rowHeight;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -150,7 +171,12 @@ static NSString *const cellID = @"cellID";
     EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
     
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
-        
+        WXChatItem *item = [[WXChatItem alloc] init];
+        item.message = msg;
+        WXChatFrame *chatFrame = [[WXChatFrame alloc] init];
+        chatFrame.item = item;
+        [self.chatMsgs addObject:chatFrame];
+        [self.chatTableView reloadData];
     } onQueue:nil completion:^(EMMessage *message, EMError *error) {
         if (!error) {
             textField.text = nil;
