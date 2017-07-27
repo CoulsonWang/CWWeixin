@@ -8,6 +8,7 @@
 
 #import "WXContactDetailController.h"
 #import "UIImage+WXCreateColorImage.h"
+#import "WXChatDetailController.h"
 
 @interface WXContactDetailController ()
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -17,17 +18,19 @@
 @implementation WXContactDetailController
 
 + (instancetype)contactDetailVC {
-    return [UIStoryboard storyboardWithName:NSStringFromClass(self) bundle:nil].instantiateInitialViewController;
+    WXContactDetailController *contactDetailVC =  [UIStoryboard storyboardWithName:NSStringFromClass(self) bundle:nil].instantiateInitialViewController;
+    return contactDetailVC;
 }
 
 - (void)setBuddy:(EMBuddy *)buddy {
     _buddy = buddy;
-    self.userNameLabel.text = buddy.username;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.userNameLabel.text = _buddy.username;
     
     [self addMsgButton];
 }
@@ -52,6 +55,12 @@
 
 - (void)sendMessage {
     // 进入聊天界面
+    self.navigationController.tabBarController.selectedIndex = 0;
+    UINavigationController *weChatNavVC = self.navigationController.tabBarController.selectedViewController;
+    
+    WXChatDetailController *chatDetailVC = [[WXChatDetailController alloc] init];
+    
+    [weChatNavVC pushViewController:chatDetailVC animated:YES];
 }
 
 @end

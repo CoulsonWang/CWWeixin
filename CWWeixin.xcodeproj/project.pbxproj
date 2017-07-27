@@ -16,6 +16,7 @@
 		B97CDAB11F29C548004D2185 /* WXContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB01F29C548004D2185 /* WXContactDetailController.m */; };
 		B97CDAB31F29C555004D2185 /* WXContactDetailController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B97CDAB21F29C555004D2185 /* WXContactDetailController.storyboard */; };
 		B97CDAB61F29C85E004D2185 /* UIImage+WXCreateColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */; };
+		B97CDAB91F29D24F004D2185 /* WXChatDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB81F29D24F004D2185 /* WXChatDetailController.m */; };
 		B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE022E1F287144002F3075 /* WXTabBarController.m */; };
 		B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02311F287302002F3075 /* WXLogRegistController.m */; };
 		B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EE02321F287302002F3075 /* WXLogRegistController.xib */; };
@@ -46,6 +47,8 @@
 		B97CDAB21F29C555004D2185 /* WXContactDetailController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WXContactDetailController.storyboard; sourceTree = "<group>"; };
 		B97CDAB41F29C85E004D2185 /* UIImage+WXCreateColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WXCreateColorImage.h"; sourceTree = "<group>"; };
 		B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WXCreateColorImage.m"; sourceTree = "<group>"; };
+		B97CDAB71F29D24F004D2185 /* WXChatDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatDetailController.h; sourceTree = "<group>"; };
+		B97CDAB81F29D24F004D2185 /* WXChatDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatDetailController.m; sourceTree = "<group>"; };
 		B9EE022D1F287144002F3075 /* WXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTabBarController.h; sourceTree = "<group>"; };
 		B9EE022E1F287144002F3075 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
 		B9EE02301F287302002F3075 /* WXLogRegistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLogRegistController.h; sourceTree = "<group>"; };
@@ -145,8 +148,8 @@
 				B9752F361F279D8500316148 /* Chat */,
 				B9752F3A1F279D8500316148 /* Contact */,
 				B9752F3E1F279D8500316148 /* Discover */,
-				B9752F421F279D8500316148 /* LogRegist */,
 				B9752F4A1F279D8500316148 /* Me */,
+				B9752F421F279D8500316148 /* LogRegist */,
 				B9752F4E1F279D8500316148 /* System */,
 			);
 			path = Classes;
@@ -167,6 +170,8 @@
 			children = (
 				B9EE02471F289B38002F3075 /* WXChatController.h */,
 				B9EE02481F289B38002F3075 /* WXChatController.m */,
+				B97CDAB71F29D24F004D2185 /* WXChatDetailController.h */,
+				B97CDAB81F29D24F004D2185 /* WXChatDetailController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */,
 				B9EE02491F289B38002F3075 /* WXChatController.m in Sources */,
 				B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */,
+				B97CDAB91F29D24F004D2185 /* WXChatDetailController.m in Sources */,
 				B9EE023B1F287374002F3075 /* WXNavigationController.m in Sources */,
 				B9752F511F279D8500316148 /* AppDelegate.m in Sources */,
 				B9EE02501F28DBE6002F3075 /* WXContactCell.m in Sources */,

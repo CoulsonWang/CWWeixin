@@ -109,8 +109,10 @@ static NSString *const cellID = @"ContactCellID";
     EMBuddy *buddy = self.friendsList[indexPath.row];
     WXContactDetailController *contactDetailVC = [WXContactDetailController contactDetailVC];
     contactDetailVC.buddy = buddy;
+    contactDetailVC.title = @"详细资料";
     
     [self.navigationController pushViewController:contactDetailVC animated:YES];
+    
 }
 
 @end
