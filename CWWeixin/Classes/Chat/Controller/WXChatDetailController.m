@@ -62,8 +62,10 @@ static NSString *const cellID = @"cellID";
         CGFloat endY = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
         CGFloat inputY = endY - self.inputView.bounds.size.height;
         [UIView animateWithDuration:duration animations:^{
+            self.chatTableView.frame = CGRectMake(0, 0, CWScreenW, inputY);
             self.inputView.frame = CGRectMake(0, inputY, CWScreenW, kInputViewHeight);
         }];
+        [self.chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:14 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }];
 }
 
@@ -73,12 +75,18 @@ static NSString *const cellID = @"cellID";
 
 #pragma mark - UITableViewDelegate 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 15;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"第%ld行",indexPath.row];
     return cell;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 
 
