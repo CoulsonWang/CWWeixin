@@ -9,7 +9,7 @@
 #import "WXChatDetailController.h"
 #import "WXInputView.h"
 
-#define kInputViewHeight 43.0
+#define kInputViewHeight 44.0
 
 static NSString *const cellID = @"cellID";
 
@@ -54,6 +54,21 @@ static NSString *const cellID = @"cellID";
     
     [self.chatTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellID];
     self.inputView.tag = 1;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_me"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItem)];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillChangeFrameNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        NSTimeInterval duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        CGFloat endY = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
+        CGFloat inputY = endY - self.inputView.bounds.size.height;
+        [UIView animateWithDuration:duration animations:^{
+            self.inputView.frame = CGRectMake(0, inputY, CWScreenW, kInputViewHeight);
+        }];
+    }];
+}
+
+- (void)rightBarButtonItemClick {
+    // do something
 }
 
 #pragma mark - UITableViewDelegate 

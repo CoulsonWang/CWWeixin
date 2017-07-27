@@ -54,6 +54,7 @@
 }
 
 - (void)sendMessage {
+    
     // 进入聊天界面
     self.navigationController.tabBarController.selectedIndex = 0;
     UINavigationController *weChatNavVC = self.navigationController.tabBarController.selectedViewController;
@@ -61,6 +62,8 @@
     WXChatDetailController *chatDetailVC = [[WXChatDetailController alloc] init];
     chatDetailVC.hidesBottomBarWhenPushed = YES;
     chatDetailVC.title = self.buddy.username;
+    
+    [self.navigationController popViewControllerAnimated:NO];
     
     [weChatNavVC pushViewController:chatDetailVC animated:YES];
     
