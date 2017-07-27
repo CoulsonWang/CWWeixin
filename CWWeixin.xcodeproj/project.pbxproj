@@ -17,6 +17,8 @@
 		B97CDAB31F29C555004D2185 /* WXContactDetailController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B97CDAB21F29C555004D2185 /* WXContactDetailController.storyboard */; };
 		B97CDAB61F29C85E004D2185 /* UIImage+WXCreateColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */; };
 		B97CDAB91F29D24F004D2185 /* WXChatDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAB81F29D24F004D2185 /* WXChatDetailController.m */; };
+		B97CDABC1F29D477004D2185 /* WXInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDABB1F29D477004D2185 /* WXInputView.m */; };
+		B97CDABE1F29D481004D2185 /* WXInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B97CDABD1F29D481004D2185 /* WXInputView.xib */; };
 		B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE022E1F287144002F3075 /* WXTabBarController.m */; };
 		B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02311F287302002F3075 /* WXLogRegistController.m */; };
 		B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EE02321F287302002F3075 /* WXLogRegistController.xib */; };
@@ -49,6 +51,9 @@
 		B97CDAB51F29C85E004D2185 /* UIImage+WXCreateColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WXCreateColorImage.m"; sourceTree = "<group>"; };
 		B97CDAB71F29D24F004D2185 /* WXChatDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatDetailController.h; sourceTree = "<group>"; };
 		B97CDAB81F29D24F004D2185 /* WXChatDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatDetailController.m; sourceTree = "<group>"; };
+		B97CDABA1F29D477004D2185 /* WXInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXInputView.h; sourceTree = "<group>"; };
+		B97CDABB1F29D477004D2185 /* WXInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXInputView.m; sourceTree = "<group>"; };
+		B97CDABD1F29D481004D2185 /* WXInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXInputView.xib; sourceTree = "<group>"; };
 		B9EE022D1F287144002F3075 /* WXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTabBarController.h; sourceTree = "<group>"; };
 		B9EE022E1F287144002F3075 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
 		B9EE02301F287302002F3075 /* WXLogRegistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLogRegistController.h; sourceTree = "<group>"; };
@@ -186,6 +191,9 @@
 		B9752F391F279D8500316148 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B97CDABA1F29D477004D2185 /* WXInputView.h */,
+				B97CDABB1F29D477004D2185 /* WXInputView.m */,
+				B97CDABD1F29D481004D2185 /* WXInputView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -512,6 +520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B97CDABE1F29D481004D2185 /* WXInputView.xib in Resources */,
 				B9EE02511F28DBE6002F3075 /* WXContactCell.xib in Resources */,
 				B9752F111F2789C700316148 /* LaunchScreen.storyboard in Resources */,
 				B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */,
@@ -584,6 +593,7 @@
 				B9752F511F279D8500316148 /* AppDelegate.m in Sources */,
 				B9EE02501F28DBE6002F3075 /* WXContactCell.m in Sources */,
 				B9EE023E1F287612002F3075 /* UINavigationBar+WXBackground.m in Sources */,
+				B97CDABC1F29D477004D2185 /* WXInputView.m in Sources */,
 				B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */,
 				B97CDAB11F29C548004D2185 /* WXContactDetailController.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,

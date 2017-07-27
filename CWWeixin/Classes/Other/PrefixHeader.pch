@@ -12,5 +12,7 @@
 #import <EaseMob.h>
 
 #define MainStoryBoard [UIStoryboard storyboardWithName:@"Main" bundle:nil]
+#define CWScreenW [UIScreen mainScreen].bounds.size.width
+#define CWScreenH [UIScreen mainScreen].bounds.size.height
 
 #endif /* PrefixHeader_pch */

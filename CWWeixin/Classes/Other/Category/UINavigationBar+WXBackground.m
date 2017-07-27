@@ -10,25 +10,18 @@
 #import <objc/message.h>
 
 @implementation UINavigationBar (WXBackground)
-static char backgroundViewKey;
-
-- (UIView *)backgroundView {
-    return objc_getAssociatedObject(self, &backgroundViewKey);
-}
-
-- (void)setBackgroundView:(UIView *)backgroundView {
-    objc_setAssociatedObject(self, &backgroundViewKey, backgroundView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 - (void)cw_setBackgroundColor:(UIColor *)backgroundColor {
-    if (!self.backgroundView) {
-        [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64)];
-        self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.backgroundView.userInteractionEnabled = NO;
-        [self insertSubview:self.backgroundView atIndex:0];
-    }
-    self.backgroundView.backgroundColor = backgroundColor;
+    
+    CGRect rect = CGRectMake(0, 0, CWScreenW, 64);
+    UIGraphicsBeginImageContext(rect.size);
+    [backgroundColor setFill];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 }
 
 @end
