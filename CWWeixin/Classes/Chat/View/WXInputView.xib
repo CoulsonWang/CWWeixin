@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -35,6 +35,9 @@
                         <constraint firstAttribute="width" constant="35" id="wmo-bs-bXC"/>
                     </constraints>
                     <state key="normal" image="ToolViewEmotion"/>
+                    <connections>
+                        <action selector="emoticonButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="sC9-wZ-vZH"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQf-H6-927">
                     <rect key="frame" x="489" y="6" width="35" height="35"/>
@@ -43,6 +46,9 @@
                         <constraint firstAttribute="height" constant="35" id="X4T-Ug-Be5"/>
                     </constraints>
                     <state key="normal" image="TypeSelectorBtn_Black"/>
+                    <connections>
+                        <action selector="moreButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="lQb-4z-ubQ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2P-ga-PCt">
                     <rect key="frame" x="0.0" y="6" width="35" height="35"/>
@@ -51,6 +57,9 @@
                         <constraint firstAttribute="width" constant="35" id="SaY-qD-erH"/>
                     </constraints>
                     <state key="normal" image="ToolViewInputVoice"/>
+                    <connections>
+                        <action selector="changeInputTypeButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="tlf-Pi-lgK"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

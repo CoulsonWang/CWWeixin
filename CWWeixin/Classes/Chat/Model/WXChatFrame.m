@@ -35,10 +35,50 @@
     
     _userIconFrame = CGRectMake(iconX, iconY, iconW, iconH);
     
+    CGFloat contentW = 0;
+    CGFloat contentH = 0;
     
-    CGSize contentSize = [item.contentText boundingRectWithSize:CGSizeMake(CWScreenW - 2 * (margin * 2 + iconW), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kContentTextFont} context:nil].size;
-    CGFloat contentW = contentSize.width + contentEdge;
-    CGFloat contentH = contentSize.height + contentEdge;
+    switch (item.chatType) {
+        case WXChatTypeText:
+        {
+            CGSize contentSize = [item.contentText boundingRectWithSize:CGSizeMake(CWScreenW - 2 * (margin * 2 + iconW), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kContentTextFont} context:nil].size;
+            contentW = contentSize.width + contentEdge;
+            contentH = contentSize.height + contentEdge;
+            
+        }
+            break;
+        case WXChatTypeImage:
+        {
+            if (item.isVertical) {
+                contentW = 200;
+                contentH = 150;
+            } else {
+                contentW = 150;
+                contentH = 200;
+            }
+        }
+            break;
+        case WXChatTypeLocation:
+        {
+            
+        }
+            break;
+        case WXChatTypeVoice:
+        {
+            
+        }
+            break;
+        case WXChatTypeVideo:
+        {
+            
+        }
+            break;
+        case WXChatTypeFile:
+        {
+            
+        }
+            break;
+    }
     CGFloat contentX = item.isMe ? CWScreenW - margin * 2 - iconW - contentW : margin * 2 + iconW;
     CGFloat contentY = iconY;
     

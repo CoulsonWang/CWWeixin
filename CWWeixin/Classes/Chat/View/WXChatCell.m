@@ -11,6 +11,8 @@
 #import "WXChatItem.h"
 #import "WXLongPressButton.h"
 #import "UIImage+WXCreateColorImage.h"
+#import <SDWebImageManager.h>
+#import <UIButton+WebCache.h>
 
 @interface WXChatCell ()
 
@@ -30,9 +32,25 @@
     WXChatItem *item = chatFrame.item;
     self.timeLabel.text = item.timeStr;
     [self.userIconButton setImage:[UIImage imageNamed:item.userIcon] forState:UIControlStateNormal];
-    [self.contentButton setTitle:item.contentText forState:UIControlStateNormal];
     [self.contentButton setBackgroundImage:[item.contentTextBackgroundImage imageWithStretch] forState:UIControlStateNormal];
     [self.contentButton setBackgroundImage:[item.contentTextBackgroundHighlightImage imageWithStretch] forState:UIControlStateHighlighted];
+    
+    switch (item.chatType) {
+        case WXChatTypeText:{
+            [self.contentButton setTitle:item.contentText forState:UIControlStateNormal];
+        }
+            break;
+        case WXChatTypeImage:{
+            if (item.contentThumbnailImage) {
+                [self.contentButton setImage:item.contentThumbnailImage forState:UIControlStateNormal];
+            } else {
+                [self.contentButton sd_setImageWithURL:item.contentThumbnailImageUrl forState:UIControlStateNormal];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -94,7 +112,23 @@
 }
 
 - (void)contentDidClick {
-    
+    switch (self.chatFrame.item.chatType) {
+        case WXChatTypeText:
+        {
+            
+        }
+            break;
+        case WXChatTypeImage:
+        {
+            if ([self.delegate respondsToSelector:@selector(chatCell:contentDidClick:)]) {
+                [self.delegate chatCell:self contentDidClick:WXChatTypeImage];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

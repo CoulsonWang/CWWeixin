@@ -16,7 +16,7 @@
 
 static NSString *const cellID = @"cellID";
 
-@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate>
+@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate>
 
 @property (weak, nonatomic) UITableView *chatTableView;
 
@@ -34,6 +34,7 @@ static NSString *const cellID = @"cellID";
         WXInputView *inputView = [WXInputView inputView];
         inputView.frame = CGRectMake(0, CWScreenH - kInputViewHeight, CWScreenW, kInputViewHeight);
         inputView.textField.delegate = self;
+        inputView.delegate = self;
         [self.view addSubview:inputView];
         
         _inputView = inputView;
@@ -154,6 +155,7 @@ static NSString *const cellID = @"cellID";
     WXChatFrame *chatFrame = self.chatMsgs[indexPath.row];
     
     cell.chatFrame = chatFrame;
+    cell.delegate = self;
     
     return cell;
 }
@@ -187,6 +189,47 @@ static NSString *const cellID = @"cellID";
     } onQueue:nil];
     
     return YES;
+}
+
+#pragma mark - WXInputViewDelegate
+- (void)inputView:(WXInputView *)inputView moreBtnDidClickWithStyle:(WXInputViewMoreStyle)style {
+    switch (style) {
+        case WXInputViewMoreStyleImage:
+        {
+            UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
+            pickVC.delegate = self;
+            [self presentViewController:pickVC animated:YES completion:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        EMChatImage *chatImage = [[EMChatImage alloc] initWithUIImage:image displayName:@"nothing"];
+        EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithImage:chatImage thumbnailImage:chatImage];
+        EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
+        
+        [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
+            
+        } onQueue:nil completion:^(EMMessage *message, EMError *error) {
+            if (!error) {
+                [self loadChatMessages];
+            }
+        } onQueue:nil];
+        
+    }];
+}
+
+#pragma mark - WXChatCellDelegate
+- (void)chatCell:(WXChatCell *)chatCell contentDidClick:(WXChatType)chatType {
+    // 创建浏览界面
 }
 
 #pragma mark - 收到消息后刷新数据

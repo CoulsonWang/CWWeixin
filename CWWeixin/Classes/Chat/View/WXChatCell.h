@@ -7,11 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXChatItem.h"
+
+@class WXChatCell;
+
+@protocol WXChatCellDelegate <NSObject>
+
+@optional
+- (void)chatCell:(WXChatCell *)chatCell contentDidClick:(WXChatType)chatType;
+
+@end
 
 @class WXChatFrame;
 
 @interface WXChatCell : UITableViewCell
 
 @property (strong, nonatomic) WXChatFrame *chatFrame;
+
+@property (weak, nonatomic) id<WXChatCellDelegate> delegate;
 
 @end
