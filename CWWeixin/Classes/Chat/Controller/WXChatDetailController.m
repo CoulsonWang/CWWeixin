@@ -16,7 +16,7 @@
 
 static NSString *const cellID = @"cellID";
 
-@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate>
 
 @property (weak, nonatomic) UITableView *chatTableView;
 
@@ -81,6 +81,7 @@ static NSString *const cellID = @"cellID";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_me"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
     
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
     [self setUpNotification];
     
@@ -175,12 +176,7 @@ static NSString *const cellID = @"cellID";
     EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
     
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
-//        WXChatItem *item = [[WXChatItem alloc] init];
-//        item.message = msg;
-//        WXChatFrame *chatFrame = [[WXChatFrame alloc] init];
-//        chatFrame.item = item;
-//        [self.chatMsgs addObject:chatFrame];
-//        [self.chatTableView reloadData];
+        
     } onQueue:nil completion:^(EMMessage *message, EMError *error) {
         if (!error) {
             textField.text = nil;
@@ -193,5 +189,13 @@ static NSString *const cellID = @"cellID";
     return YES;
 }
 
+#pragma mark - 收到消息后刷新数据
+- (void)didReceiveMessage:(EMMessage *)message {
+    [self loadChatMessages];
+}
+
+- (void)didReceiveOfflineMessages:(NSArray *)offlineMessages {
+    [self loadChatMessages];
+}
 
 @end
