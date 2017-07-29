@@ -179,72 +179,26 @@ static NSString *const cellID = @"cellID";
 
 - (void)setUpRecorder {
     NSInteger nowTime = (NSInteger)[[NSDate date] timeIntervalSince1970];
-    NSString *fileName = [NSString stringWithFormat:@"%@%ld",self.buddy.username,nowTime];
+    NSString *fileName = [NSString stringWithFormat:@"%@%ld.caf",self.buddy.username,nowTime];
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
     self.currentVoiceFilePath = path;
     NSURL *url = [NSURL fileURLWithPath:path];
     
-    NSMutableDictionary * recordSetting = [NSMutableDictionary dictionary];
-    [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:44100] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
-    [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityHigh] forKey:AVEncoderAudioQualityKey];
-    [recordSetting setObject:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
-    
-    
-    AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:nil];
+    AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:url settings:@{} error:nil];
     [recorder prepareToRecord];
     
     self.recorder = recorder;
 }
 
-- (void)transformOriginVoiceFileToMp3 {
-    NSString *cafFilePath = [self getVoiceOriginFilePath];    //caf文件路径
-    NSString *mp3FilePath = [self getDestVoiceFilePath];      //存储mp3文件的路径
-    
-    int read, write;
-    
-    FILE *pcm = fopen([cafFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
-    fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-    FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
-    
-    const int PCM_SIZE = 8192;
-    const int MP3_SIZE = 8192;
-    short int pcm_buffer[PCM_SIZE*2];
-    unsigned char mp3_buffer[MP3_SIZE];
-    
-    lame_t lame = lame_init();
-    lame_set_in_samplerate(lame, 44100);
-    lame_set_VBR(lame, vbr_default);
-    lame_init_params(lame);
-    
-    do {
-        read = (int)fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-        if (read == 0)
-            write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-        else
-            write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-        
-        fwrite(mp3_buffer, write, 1, mp3);
-        
-    } while (read != 0);
-    
-    lame_close(lame);
-    fclose(mp3);
-    fclose(pcm);
-}
 
 - (NSString *)getVoiceOriginFilePath {
     return self.currentVoiceFilePath;
 }
 
-- (NSString *)getDestVoiceFilePath {
-    NSString *destPath = [[self getVoiceOriginFilePath] stringByAppendingString:@".mp3"];
-    return destPath;
-}
+
 
 - (void)sendVoiceMessage {
-    EMChatVoice *chatVoice = [[EMChatVoice alloc] initWithFile:[self getDestVoiceFilePath] displayName:@"语音消息"];
+    EMChatVoice *chatVoice = [[EMChatVoice alloc] initWithFile:[self getVoiceOriginFilePath] displayName:@"语音消息"];
     chatVoice.duration = self.voiceDuration;
     EMVoiceMessageBody *voiceMsg = [[EMVoiceMessageBody alloc] initWithChatObject:chatVoice];
     EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[voiceMsg]];
@@ -336,7 +290,7 @@ static NSString *const cellID = @"cellID";
         {
             self.voiceDuration = self.recorder.currentTime;
             [self.recorder stop];
-            [self transformOriginVoiceFileToMp3];
+//            [self transformOriginVoiceFileToMp3];
             [self sendVoiceMessage];
         }
             break;
