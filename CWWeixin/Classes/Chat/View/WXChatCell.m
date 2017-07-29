@@ -48,6 +48,10 @@
             }
         }
             break;
+        case WXChatTypeVoice:{
+            [self.contentButton setTitle:[NSString stringWithFormat:@"%ld",item.voiceDuration] forState:UIControlStateNormal];
+        }
+            break;
         default:
             break;
     }

@@ -33,6 +33,10 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic, readonly) NSURL *contentThumbnailImageUrl;
 @property (assign, nonatomic, getter=isVertical, readonly) BOOL vertical;
 
+// 语音聊天内容属性
+@property (assign, nonatomic, readonly) NSUInteger voiceDuration;
+@property (strong, nonatomic, readonly) NSURL *voicePath;
+
 // 聊天类型
 @property (assign, nonatomic, readonly) WXChatType chatType;
 

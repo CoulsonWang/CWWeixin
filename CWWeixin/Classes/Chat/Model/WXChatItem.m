@@ -67,12 +67,11 @@
         {
             // 音频SDK会自动下载
             EMVoiceMessageBody *body = (EMVoiceMessageBody *)msgBody;
-            NSLog(@"音频remote路径 -- %@"      ,body.remotePath);
-            NSLog(@"音频local路径 -- %@"       ,body.localPath); // 需要使用SDK提供的下载方法后才会存在（音频会自动调用）
-            NSLog(@"音频的secret -- %@"        ,body.secretKey);
-            NSLog(@"音频文件大小 -- %lld"       ,body.fileLength);
-            NSLog(@"音频文件的下载状态 -- %lu"   ,body.attachmentDownloadStatus);
-            NSLog(@"音频的时间长度 -- %lu"      ,body.duration);
+            
+            _voiceDuration = body.duration;
+            NSString *pathStr = ([[NSFileManager defaultManager] fileExistsAtPath:body.localPath]) ? body.localPath : body.remotePath;
+            _voicePath = [NSURL URLWithString:pathStr];
+            
         }
             break;
         case eMessageBodyType_Video:

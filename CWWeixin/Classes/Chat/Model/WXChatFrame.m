@@ -65,7 +65,9 @@
             break;
         case WXChatTypeVoice:
         {
-            
+            contentH = iconH;
+            CGFloat maxWidth = CWScreenW - 2 * (margin * 2 + iconW);
+            contentW = [self calculateVoiceContentWidthWithDuration:item.voiceDuration maxWidth:maxWidth minWidth:64];
         }
             break;
         case WXChatTypeVideo:
@@ -85,6 +87,16 @@
     _contentFrame = CGRectMake(contentX, contentY, contentW, contentH);
     
     _rowHeight = (contentH > iconH) ? CGRectGetMaxY(self.contentFrame) + margin : CGRectGetMaxY(self.userIconFrame) + margin;
+}
+
+- (CGFloat)calculateVoiceContentWidthWithDuration:(NSUInteger)duration maxWidth:(CGFloat)maxWidth minWidth:(CGFloat)minWidth{
+    if (duration <= 5) {
+        return minWidth;
+    } else if (duration >= 60) {
+        return maxWidth;
+    } else {
+        return minWidth + (maxWidth - minWidth) * duration / 60.0;
+    }
 }
 
 @end

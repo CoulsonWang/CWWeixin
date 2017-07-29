@@ -24,6 +24,7 @@
 		B97CDACA1F2A224D004D2185 /* NSString+WXTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDAC91F2A224D004D2185 /* NSString+WXTimestamp.m */; };
 		B97CDACD1F2A2623004D2185 /* WXLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDACC1F2A2623004D2185 /* WXLongPressButton.m */; };
 		B97CDAD01F2A2822004D2185 /* WXChatFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDACF1F2A2822004D2185 /* WXChatFrame.m */; };
+		B9B227E51F2CD4C800715218 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B227E41F2CD4C800715218 /* libmp3lame.a */; };
 		B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE022E1F287144002F3075 /* WXTabBarController.m */; };
 		B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02311F287302002F3075 /* WXLogRegistController.m */; };
 		B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EE02321F287302002F3075 /* WXLogRegistController.xib */; };
@@ -69,6 +70,8 @@
 		B97CDACC1F2A2623004D2185 /* WXLongPressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXLongPressButton.m; sourceTree = "<group>"; };
 		B97CDACE1F2A2822004D2185 /* WXChatFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXChatFrame.h; sourceTree = "<group>"; };
 		B97CDACF1F2A2822004D2185 /* WXChatFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatFrame.m; sourceTree = "<group>"; };
+		B9B227E31F2CD4C800715218 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		B9B227E41F2CD4C800715218 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		B9EE022D1F287144002F3075 /* WXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTabBarController.h; sourceTree = "<group>"; };
 		B9EE022E1F287144002F3075 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
 		B9EE02301F287302002F3075 /* WXLogRegistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLogRegistController.h; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				046ABEE7723BCD71268EB1F2 /* libPods-CWWeixin.a in Frameworks */,
+				B9B227E51F2CD4C800715218 /* libmp3lame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +373,15 @@
 			path = System;
 			sourceTree = "<group>";
 		};
+		B9B227E21F2CD4C800715218 /* lame */ = {
+			isa = PBXGroup;
+			children = (
+				B9B227E31F2CD4C800715218 /* lame.h */,
+				B9B227E41F2CD4C800715218 /* libmp3lame.a */,
+			);
+			path = lame;
+			sourceTree = "<group>";
+		};
 		B9EE02241F2870F9002F3075 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +435,7 @@
 		B9EE02291F2870F9002F3075 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B9B227E21F2CD4C800715218 /* lame */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -756,6 +770,10 @@
 				INFOPLIST_FILE = CWWeixin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CWWeixin/Classes/Other/Lib/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Personal.YYWang.CWWeixin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -772,6 +790,10 @@
 				INFOPLIST_FILE = CWWeixin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CWWeixin/Classes/Other/Lib/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Personal.YYWang.CWWeixin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
