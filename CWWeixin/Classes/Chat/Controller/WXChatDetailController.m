@@ -11,18 +11,22 @@
 #import "WXChatCell.h"
 #import "WXChatItem.h"
 #import "WXChatFrame.h"
+#import <MWPhotoBrowser.h>
 
 #define kInputViewHeight 44.0
 
 static NSString *const cellID = @"cellID";
 
-@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate>
+@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate, MWPhotoBrowserDelegate>
 
 @property (weak, nonatomic) UITableView *chatTableView;
 
 @property (weak, nonatomic) WXInputView *inputView;
 
 @property (strong, nonatomic) NSMutableArray<WXChatFrame *> *chatMsgs;
+
+@property (strong, nonatomic) NSMutableArray *chatImages;
+@property (strong, nonatomic) NSMutableArray *chatThumbnailImages;
 
 @end
 
@@ -62,6 +66,20 @@ static NSString *const cellID = @"cellID";
     return _chatMsgs;
 }
 
+- (NSMutableArray *)chatImages {
+    if (!_chatImages) {
+        _chatImages = [NSMutableArray array];
+    }
+    return _chatImages;
+}
+
+- (NSMutableArray *)chatThumbnailImages {
+    if (!_chatThumbnailImages) {
+        _chatThumbnailImages = [NSMutableArray array];
+    }
+    return _chatThumbnailImages;
+}
+
 #pragma mark - setter
 - (void)setBuddy:(EMBuddy *)buddy {
     _buddy = buddy;
@@ -85,12 +103,11 @@ static NSString *const cellID = @"cellID";
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
     [self setUpNotification];
-    
-    [self loadChatMessages];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self scrollTheTableView];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadChatMessages];
 }
 
 - (void)dealloc {
@@ -117,6 +134,9 @@ static NSString *const cellID = @"cellID";
 
 - (void)loadChatMessages {
     [self.chatMsgs removeAllObjects];
+    [self.chatImages removeAllObjects];
+    [self.chatThumbnailImages removeAllObjects];
+    
     EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.buddy.username conversationType:eConversationTypeChat];
     NSArray *msgs = [conversation loadAllMessages];
     for (EMMessage *msg in msgs) {
@@ -130,6 +150,10 @@ static NSString *const cellID = @"cellID";
         chatFrame.item = item;
         
         [self.chatMsgs addObject:chatFrame];
+        if (item.chatType == WXChatTypeImage) {
+            [self.chatImages addObject:(item.contentImage ? item.contentImage : item.contentImageUrl)];
+            [self.chatThumbnailImages addObject:(item.contentThumbnailImage ? item.contentThumbnailImage : item.contentThumbnailImageUrl)];
+        }
     }
     
     [self.chatTableView reloadData];
@@ -230,7 +254,57 @@ static NSString *const cellID = @"cellID";
 #pragma mark - WXChatCellDelegate
 - (void)chatCell:(WXChatCell *)chatCell contentDidClick:(WXChatType)chatType {
     // 创建浏览界面
+    if (chatType == WXChatTypeImage) {
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        
+        NSUInteger index = (chatCell.chatFrame.item.contentThumbnailImage) ? [self.chatThumbnailImages indexOfObject:chatCell.chatFrame.item.contentThumbnailImage] : [self.chatThumbnailImages indexOfObject:chatCell.chatFrame.item.contentThumbnailImageUrl];
+        [browser setCurrentPhotoIndex:index];
+        
+        // Present
+        [self.navigationController showViewController:browser sender:nil];
+    }
+    
+    
 }
+
+#pragma mark - MWPhotoBrowserDelegate
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.chatThumbnailImages.count;
+}
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    
+    id img = self.chatImages[index];
+    
+    return [img isKindOfClass:[UIImage class]] ? [MWPhoto photoWithImage:img] : [MWPhoto photoWithURL:img];
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    
+    id thumbnail = self.chatThumbnailImages[index];
+    
+    return [thumbnail isKindOfClass:[UIImage class]] ? [MWPhoto photoWithImage:thumbnail] : [MWPhoto photoWithURL:thumbnail];
+}
+//
+//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+//    
+//}
+//
+//-(NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+//    
+//}
+//
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+//    
+//}
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+//    
+//}
+//- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
+//    
+//}
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
+//    
+//}
 
 #pragma mark - 收到消息后刷新数据
 - (void)didReceiveMessage:(EMMessage *)message {
