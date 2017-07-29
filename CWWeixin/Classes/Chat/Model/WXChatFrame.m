@@ -20,7 +20,7 @@
     
     CGSize timeStrSize = [item.timeStr boundingRectWithSize:CGSizeMake(CWScreenW, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kTimeFont} context:nil].size;
     CGFloat timeW = timeStrSize.width + timeEdge;
-    CGFloat timeH = timeStrSize.height + timeEdge;
+    CGFloat timeH = (item.isShowTime) ? timeStrSize.height + timeEdge : 0;
     CGFloat timeX = (CWScreenW - timeW) * 0.5;
     CGFloat timeY = 0;
     

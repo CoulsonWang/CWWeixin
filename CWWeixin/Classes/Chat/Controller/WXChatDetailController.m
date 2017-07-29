@@ -119,7 +119,11 @@ static NSString *const cellID = @"cellID";
     NSArray *msgs = [conversation loadAllMessages];
     for (EMMessage *msg in msgs) {
         WXChatItem *item = [[WXChatItem alloc] init];
+        WXChatItem *lastItem = [self.chatMsgs.lastObject item];
+        
+        item.preTimestamp = lastItem.message.timestamp;
         item.message = msg;
+        
         WXChatFrame *chatFrame = [[WXChatFrame alloc] init];
         chatFrame.item = item;
         
@@ -171,12 +175,12 @@ static NSString *const cellID = @"cellID";
     EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
     
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
-        WXChatItem *item = [[WXChatItem alloc] init];
-        item.message = msg;
-        WXChatFrame *chatFrame = [[WXChatFrame alloc] init];
-        chatFrame.item = item;
-        [self.chatMsgs addObject:chatFrame];
-        [self.chatTableView reloadData];
+//        WXChatItem *item = [[WXChatItem alloc] init];
+//        item.message = msg;
+//        WXChatFrame *chatFrame = [[WXChatFrame alloc] init];
+//        chatFrame.item = item;
+//        [self.chatMsgs addObject:chatFrame];
+//        [self.chatTableView reloadData];
     } onQueue:nil completion:^(EMMessage *message, EMError *error) {
         if (!error) {
             textField.text = nil;

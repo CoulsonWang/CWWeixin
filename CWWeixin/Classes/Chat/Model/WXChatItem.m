@@ -22,6 +22,7 @@
     _me = [loginUserName isEqualToString:message.from];
     _userIcon = self.me ? @"xhr" : @"add_friend_icon_offical";
     _timeStr = [NSString convastionTimeStr:message.timestamp];
+    _showTime = (message.timestamp - self.preTimestamp) > 60000;
     _contentTextBackgroundImage = self.me ? [UIImage imageNamed:@"SenderTextNodeBkg"] : [UIImage imageNamed:@"ReceiverTextNodeBkg"];
     _contentTextBackgroundHighlightImage = self.me ? [UIImage imageNamed:@"SenderTextNodeBkgHL"] : [UIImage imageNamed:@"ReceiverTextNodeBkgHL"];
     

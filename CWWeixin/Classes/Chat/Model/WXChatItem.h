@@ -12,11 +12,15 @@
 
 @property (strong, nonatomic) EMMessage *message;
 
+@property (assign, nonatomic) long long preTimestamp;
+
 @property (strong, nonatomic, readonly) NSString *contentText;
 
 @property (strong, nonatomic, readonly) NSString *userIcon;
 
 @property (strong, nonatomic, readonly) NSString *timeStr;
+
+@property (assign, nonatomic, readonly, getter=isShowTime) BOOL showTime;
 
 @property (assign, nonatomic, getter=isMe, readonly) BOOL me;
 
