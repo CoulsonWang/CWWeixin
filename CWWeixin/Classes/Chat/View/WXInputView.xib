@@ -28,6 +28,20 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DeY-qe-xMR">
+                    <rect key="frame" x="38" y="5" width="413" height="34"/>
+                    <state key="normal" title="按住 说话">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" title="松开 发送"/>
+                    <connections>
+                        <action selector="voiceTouchDown:" destination="iN0-l3-epB" eventType="touchDown" id="TG7-jd-erp"/>
+                        <action selector="voiceTouchDragInside:" destination="iN0-l3-epB" eventType="touchDragInside" id="0sk-RJ-buf"/>
+                        <action selector="voiceTouchDragOutside:" destination="iN0-l3-epB" eventType="touchDragOutside" id="Fhj-ir-VgP"/>
+                        <action selector="voiceTouchUpInside:" destination="iN0-l3-epB" eventType="touchUpInside" id="07J-Jc-uo0"/>
+                        <action selector="voiceTouchUpOutside:" destination="iN0-l3-epB" eventType="touchUpOutside" id="1Po-xL-DDS"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owf-2M-5oS">
                     <rect key="frame" x="454" y="6" width="35" height="35"/>
                     <constraints>
@@ -57,6 +71,7 @@
                         <constraint firstAttribute="width" constant="35" id="SaY-qD-erH"/>
                     </constraints>
                     <state key="normal" image="ToolViewInputVoice"/>
+                    <state key="selected" image="ToolViewInputText"/>
                     <connections>
                         <action selector="changeInputTypeButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="tlf-Pi-lgK"/>
                     </connections>
@@ -67,12 +82,15 @@
                 <constraint firstItem="Qh9-vs-76q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="14k-vl-0Uf"/>
                 <constraint firstAttribute="trailing" secondItem="Qh9-vs-76q" secondAttribute="trailing" id="2DB-Kl-1XP"/>
                 <constraint firstItem="Owf-2M-5oS" firstAttribute="leading" secondItem="axz-yM-cue" secondAttribute="trailing" constant="3" id="95e-hB-VAd"/>
+                <constraint firstItem="DeY-qe-xMR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HhG-2M-hfj"/>
                 <constraint firstItem="axz-yM-cue" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="InN-lF-gyT"/>
                 <constraint firstItem="axz-yM-cue" firstAttribute="leading" secondItem="z2P-ga-PCt" secondAttribute="trailing" constant="3" id="Jm6-VW-tvz"/>
                 <constraint firstAttribute="trailing" secondItem="YQf-H6-927" secondAttribute="trailing" id="cCE-r9-toN"/>
+                <constraint firstItem="DeY-qe-xMR" firstAttribute="leading" secondItem="axz-yM-cue" secondAttribute="leading" id="eug-RQ-lPd"/>
                 <constraint firstAttribute="bottom" secondItem="axz-yM-cue" secondAttribute="bottom" constant="5" id="ewW-OH-rVG"/>
                 <constraint firstAttribute="bottom" secondItem="YQf-H6-927" secondAttribute="bottom" constant="3" id="iy5-Lf-npX"/>
                 <constraint firstItem="YQf-H6-927" firstAttribute="leading" secondItem="Owf-2M-5oS" secondAttribute="trailing" id="kGg-3g-3ds"/>
+                <constraint firstItem="DeY-qe-xMR" firstAttribute="width" secondItem="axz-yM-cue" secondAttribute="width" id="nDL-kn-PBu"/>
                 <constraint firstItem="Qh9-vs-76q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wC1-TG-9rw"/>
                 <constraint firstAttribute="bottom" secondItem="Owf-2M-5oS" secondAttribute="bottom" constant="3" id="wqB-4b-7C5"/>
                 <constraint firstItem="z2P-ga-PCt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yH6-7m-T3i"/>
@@ -82,12 +100,14 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="textField" destination="axz-yM-cue" id="KK6-9u-sYl"/>
+                <outlet property="voiceButton" destination="DeY-qe-xMR" id="BRA-so-VSa"/>
             </connections>
             <point key="canvasLocation" x="58" y="304.5"/>
         </view>
     </objects>
     <resources>
         <image name="ToolViewEmotion" width="35" height="35"/>
+        <image name="ToolViewInputText" width="35" height="35"/>
         <image name="ToolViewInputVoice" width="35" height="35"/>
         <image name="TypeSelectorBtn_Black" width="35" height="35"/>
     </resources>

@@ -41,6 +41,8 @@ static NSString *const cellID = @"ContactCellID";
     self.tableView.rowHeight = 50;
     
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+    
+    [self reloadFriendList];
 }
 
 
@@ -70,6 +72,17 @@ static NSString *const cellID = @"ContactCellID";
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (void)reloadFriendList {
+    [[EaseMob sharedInstance].chatManager asyncFetchBuddyListWithCompletion:^(NSArray *buddyList, EMError *error) {
+        if (!error) {
+            [self.friendsList removeAllObjects];
+            [self.friendsList addObjectsFromArray:buddyList];
+            [self.tableView reloadData];
+        }
+    } onQueue:nil];
+    
+}
+
 #pragma mark - 监听好友列表改变
 
 - (void)didUpdateBuddyList:(NSArray *)buddyList changedBuddies:(NSArray *)changedBuddies isAdd:(BOOL)isAdd {
@@ -77,6 +90,19 @@ static NSString *const cellID = @"ContactCellID";
     [self.friendsList addObjectsFromArray:buddyList];
     [self.tableView reloadData];
 }
+
+- (void)didAcceptBuddySucceed:(NSString *)username {
+    [self reloadFriendList];
+}
+
+- (void)didAcceptedByBuddy:(NSString *)username {
+    [self reloadFriendList];
+}
+
+- (void)didRemovedByBuddy:(NSString *)username {
+    [self reloadFriendList];
+}
+
 
 #pragma mark - TableViewDataSource
 

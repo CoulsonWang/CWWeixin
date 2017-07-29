@@ -13,6 +13,12 @@ typedef enum : NSUInteger {
     WXInputViewMoreStyleLocation,
     WXInputViewMoreStyleVideo,
 } WXInputViewMoreStyle;
+typedef enum : NSUInteger {
+    WXInputVoiceStatusSpeaking,
+    WXInputVoiceStatusWillCancle,
+    WXInputVoiceStatusSent,
+    WXInputVoiceStatusCancled,
+} WXInputVoiceStatus;
 
 @class WXInputView;
 
@@ -20,6 +26,7 @@ typedef enum : NSUInteger {
 
 @optional
 - (void)inputView:(WXInputView *)inputView moreBtnDidClickWithStyle:(WXInputViewMoreStyle)style;
+- (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status;
 
 @end
 

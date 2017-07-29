@@ -102,6 +102,8 @@ static NSString *const cellID = @"cellID";
     
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
+    [self loadChatMessages];
+    
     [self setUpNotification];
 }
 
@@ -225,8 +227,32 @@ static NSString *const cellID = @"cellID";
             [self presentViewController:pickVC animated:YES completion:nil];
         }
             break;
-            
         default:
+            break;
+    }
+}
+
+- (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status {
+    switch (status) {
+        case WXInputVoiceStatusSpeaking:
+        {
+            
+        }
+            break;
+        case WXInputVoiceStatusWillCancle:
+        {
+            
+        }
+            break;
+        case WXInputVoiceStatusSent:
+        {
+            
+        }
+            break;
+        case WXInputVoiceStatusCancled:
+        {
+            
+        }
             break;
     }
 }
@@ -284,27 +310,7 @@ static NSString *const cellID = @"cellID";
     
     return [thumbnail isKindOfClass:[UIImage class]] ? [MWPhoto photoWithImage:thumbnail] : [MWPhoto photoWithURL:thumbnail];
 }
-//
-//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
-//    
-//}
-//
-//-(NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
-//    
-//}
-//
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-//    
-//}
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
-//    
-//}
-//- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
-//    
-//}
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
-//    
-//}
+
 
 #pragma mark - 收到消息后刷新数据
 - (void)didReceiveMessage:(EMMessage *)message {
