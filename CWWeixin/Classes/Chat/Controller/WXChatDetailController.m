@@ -13,7 +13,6 @@
 #import "WXChatFrame.h"
 #import <MWPhotoBrowser.h>
 #import <AVFoundation/AVFoundation.h>
-#import "lame.h"
 
 #define kInputViewHeight 44.0
 
@@ -32,7 +31,6 @@ static NSString *const cellID = @"cellID";
 
 @property (strong, nonatomic) AVAudioRecorder *recorder;
 @property (assign, nonatomic) NSTimeInterval voiceDuration;
-@property (strong, nonatomic) NSString *currentVoiceFilePath;
 
 @end
 
@@ -181,7 +179,6 @@ static NSString *const cellID = @"cellID";
     NSInteger nowTime = (NSInteger)[[NSDate date] timeIntervalSince1970];
     NSString *fileName = [NSString stringWithFormat:@"%@%ld.caf",self.buddy.username,nowTime];
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
-    self.currentVoiceFilePath = path;
     NSURL *url = [NSURL fileURLWithPath:path];
     
     AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:url settings:@{} error:nil];
@@ -190,21 +187,13 @@ static NSString *const cellID = @"cellID";
     self.recorder = recorder;
 }
 
-
-- (NSString *)getVoiceOriginFilePath {
-    return self.currentVoiceFilePath;
-}
-
-
-
 - (void)sendVoiceMessage {
-    EMChatVoice *chatVoice = [[EMChatVoice alloc] initWithFile:[self getVoiceOriginFilePath] displayName:@"语音消息"];
+    EMChatVoice *chatVoice = [[EMChatVoice alloc] initWithFile:self.recorder.url.path displayName:@"语音消息"];
     chatVoice.duration = self.voiceDuration;
     EMVoiceMessageBody *voiceMsg = [[EMVoiceMessageBody alloc] initWithChatObject:chatVoice];
     EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[voiceMsg]];
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:nil onQueue:nil completion:^(EMMessage *message, EMError *error) {
         if (!error) {
-            NSLog(@"%@",message);
             [self loadChatMessages];
         }
         
@@ -290,7 +279,6 @@ static NSString *const cellID = @"cellID";
         {
             self.voiceDuration = self.recorder.currentTime;
             [self.recorder stop];
-//            [self transformOriginVoiceFileToMp3];
             [self sendVoiceMessage];
         }
             break;

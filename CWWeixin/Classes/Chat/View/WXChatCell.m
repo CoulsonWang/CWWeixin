@@ -13,6 +13,7 @@
 #import "UIImage+WXCreateColorImage.h"
 #import <SDWebImageManager.h>
 #import <UIButton+WebCache.h>
+#import "WXMusicTool.h"
 
 @interface WXChatCell ()
 
@@ -21,6 +22,8 @@
 @property (weak, nonatomic) WXLongPressButton *userIconButton;
 
 @property (weak, nonatomic) WXLongPressButton *contentButton;
+
+@property (weak, nonatomic) UILabel *durationLabel;
 
 @end
 
@@ -34,7 +37,7 @@
     [self.userIconButton setImage:[UIImage imageNamed:item.userIcon] forState:UIControlStateNormal];
     [self.contentButton setBackgroundImage:[item.contentTextBackgroundImage imageWithStretch] forState:UIControlStateNormal];
     [self.contentButton setBackgroundImage:[item.contentTextBackgroundHighlightImage imageWithStretch] forState:UIControlStateHighlighted];
-    
+    self.durationLabel.hidden = (item.chatType != WXChatTypeVoice);
     switch (item.chatType) {
         case WXChatTypeText:{
             [self.contentButton setTitle:item.contentText forState:UIControlStateNormal];
@@ -49,7 +52,8 @@
         }
             break;
         case WXChatTypeVoice:{
-            [self.contentButton setTitle:[NSString stringWithFormat:@"%ld",item.voiceDuration] forState:UIControlStateNormal];
+            [self.contentButton setImage:item.voiceImage forState:UIControlStateNormal];
+            self.durationLabel.text = [NSString stringWithFormat:@"%ld\"",item.voiceDuration];
         }
             break;
         default:
@@ -93,6 +97,15 @@
         [contentButton addTarget:self action:@selector(contentDidClick) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:contentButton];
         self.contentButton = contentButton;
+        
+        
+        UILabel *durationLabel = [[UILabel alloc] init];
+        durationLabel.textColor = [UIColor lightGrayColor];
+        durationLabel.font = kTimeFont;
+        durationLabel.textAlignment = NSTextAlignmentCenter;
+        durationLabel.hidden = YES;
+        [self.contentView addSubview:durationLabel];
+        self.durationLabel = durationLabel;
 
     }
     return self;
@@ -103,11 +116,16 @@
     [super layoutSubviews];
     
     self.timeLabel.frame = self.chatFrame.timeFrame;
+    
     self.userIconButton.frame = self.chatFrame.userIconFrame;
     
     self.contentButton.frame = self.chatFrame.contentFrame;
+    
+    self.durationLabel.frame = self.chatFrame.durationFrame;
+    
+    
     CGFloat sideEdge = self.chatFrame.contentFrame.size.width * 0.04;
-    self.contentButton.titleEdgeInsets = UIEdgeInsetsMake(-10, sideEdge, 0, sideEdge);
+    self.contentButton.contentEdgeInsets = UIEdgeInsetsMake(-10, sideEdge, 0, sideEdge);
 }
 
 #pragma mark - 私有方法
@@ -129,7 +147,15 @@
             }
         }
             break;
-            
+        case WXChatTypeVoice:
+        {
+            if ([WXMusicTool sharedInstance].isPlaying) {
+                [[WXMusicTool sharedInstance] stopPlaying];
+            } else {
+                [[WXMusicTool sharedInstance] playVoice:self.chatFrame.item.voicePath];
+            }
+        }
+            break;
         default:
             break;
     }

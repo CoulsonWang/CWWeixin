@@ -86,6 +86,12 @@
     
     _contentFrame = CGRectMake(contentX, contentY, contentW, contentH);
     
+    CGFloat durationW = 18;
+    CGFloat durationH = durationW;
+    CGFloat durationX = item.isMe ? CGRectGetMinX(self.contentFrame) - durationW : CGRectGetMaxX(self.contentFrame);
+    CGFloat durationY = CGRectGetMinY(self.contentFrame) + durationH * 0.5 ;
+    _durationFrame = CGRectMake(durationX, durationY, durationW, durationH);
+    
     _rowHeight = (contentH > iconH) ? CGRectGetMaxY(self.contentFrame) + margin : CGRectGetMaxY(self.userIconFrame) + margin;
 }
 

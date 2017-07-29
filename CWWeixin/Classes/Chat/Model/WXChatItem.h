@@ -36,6 +36,8 @@ typedef enum : NSUInteger {
 // 语音聊天内容属性
 @property (assign, nonatomic, readonly) NSUInteger voiceDuration;
 @property (strong, nonatomic, readonly) NSURL *voicePath;
+@property (strong, nonatomic, readonly) UIImage *voiceImage;
+@property (strong, nonatomic, readonly) UIImage *voicePlayingImage;
 
 // 聊天类型
 @property (assign, nonatomic, readonly) WXChatType chatType;

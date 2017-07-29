@@ -10,6 +10,7 @@
 
 #define kTimeFont [UIFont systemFontOfSize:12.0]
 #define kContentTextFont [UIFont systemFontOfSize:16.0]
+#define kDurationFont [UIfont systemFontOfSize:15.0]
 
 @class WXChatItem;
 
@@ -22,6 +23,8 @@
 @property (assign, nonatomic, readonly) CGRect userIconFrame;
 
 @property (assign, nonatomic, readonly) CGRect contentFrame;
+
+@property (assign, nonatomic, readonly) CGRect durationFrame;
 
 @property (assign, nonatomic, readonly) CGFloat rowHeight;
 

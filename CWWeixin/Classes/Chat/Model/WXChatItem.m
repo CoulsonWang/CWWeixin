@@ -25,6 +25,7 @@
     _showTime = (message.timestamp - self.preTimestamp) > 60000;
     _contentTextBackgroundImage = self.me ? [UIImage imageNamed:@"SenderTextNodeBkg"] : [UIImage imageNamed:@"ReceiverTextNodeBkg"];
     _contentTextBackgroundHighlightImage = self.me ? [UIImage imageNamed:@"SenderTextNodeBkgHL"] : [UIImage imageNamed:@"ReceiverTextNodeBkgHL"];
+    _voiceImage = self.me ? [UIImage imageNamed:@"SenderVoiceNodePlaying"] : [UIImage imageNamed:@"SenderVoiceNodePlaying"];
     
     id<IEMMessageBody> msgBody = message.messageBodies.firstObject;
     
