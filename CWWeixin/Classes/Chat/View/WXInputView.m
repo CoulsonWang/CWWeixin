@@ -35,6 +35,7 @@ typedef enum : NSUInteger {
     self.voiceButton.layer.borderWidth = 0.5;
     self.voiceButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.voiceButton.layer.cornerRadius = 5;
+    self.voiceButton.layer.masksToBounds = YES;
 }
 - (IBAction)emoticonButtonClick:(UIButton *)sender {
     
