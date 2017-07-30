@@ -9,6 +9,7 @@
 #import "WXContactController.h"
 #import "WXContactCell.h"
 #import "WXContactDetailController.h"
+#import "WXContactHeaderController.h"
 
 static NSString *const cellID = @"ContactCellID";
 
@@ -33,6 +34,12 @@ static NSString *const cellID = @"ContactCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 添加表头视图
+    WXContactHeaderController *headerVC = [[WXContactHeaderController alloc] init];
+    headerVC.view.frame = CGRectMake(0, 0, 0, headerVC.viewHeight);
+    self.tableView.tableHeaderView = headerVC.view;
+    [self addChildViewController:headerVC];
     
     self.title = @"通讯录";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"contacts_add_friend"] style:UIBarButtonItemStylePlain target:self action:@selector(addFriendButtonClick)];

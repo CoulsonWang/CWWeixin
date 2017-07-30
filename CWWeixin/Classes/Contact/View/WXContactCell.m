@@ -7,6 +7,7 @@
 //
 
 #import "WXContactCell.h"
+#import "WXContactHeaderItem.h"
 
 @interface WXContactCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *userIconImageView;
@@ -16,9 +17,15 @@
 
 @implementation WXContactCell
 
+- (void)setHeaderItem:(WXContactHeaderItem *)headerItem {
+    _headerItem = headerItem;
+    self.userNameLabel.text = headerItem.title;
+    self.userIconImageView.image = headerItem.icon;
+}
+
 - (void)setBuddy:(EMBuddy *)buddy {
     _buddy = buddy;
-    self.userIconImageView.image = [UIImage imageNamed:@"add_friend_icon_offical"];
+    self.userIconImageView.image = [UIImage imageNamed:@"xhr"];
     self.userNameLabel.text = buddy.username;
 }
 

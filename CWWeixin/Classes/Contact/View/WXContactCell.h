@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class WXContactHeaderItem;
+
 @interface WXContactCell : UITableViewCell
 
 @property (strong, nonatomic) EMBuddy *buddy;
 
+@property (strong, nonatomic) WXContactHeaderItem *headerItem;
 
 @end
