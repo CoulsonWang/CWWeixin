@@ -13,8 +13,17 @@
 
 + (instancetype)itemWithConversation:(EMConversation *)conversation {
     WXSessionItem *item = [[WXSessionItem alloc] init];
-    item.icon = [UIImage imageNamed:@"add_friend_icon_offical"];
-    item.userName = conversation.chatter;
+    
+    
+    if (conversation.conversationType == eConversationTypeGroupChat) {
+        EMGroup *group = [[EaseMob sharedInstance].chatManager fetchGroupInfo:conversation.chatter error:nil];
+        item.userName = group.groupSubject;
+        item.icon = [UIImage imageNamed:@"add_friend_icon_addgroup"];
+    } else {
+        item.userName = conversation.chatter;
+        item.icon = [UIImage imageNamed:@"add_friend_icon_offical"];
+    }
+    
     
     item.unreadBadgeValue = [[EaseMob sharedInstance].chatManager unreadMessagesCountForConversation:conversation.chatter];
     

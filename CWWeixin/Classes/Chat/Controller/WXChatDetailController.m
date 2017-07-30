@@ -36,6 +36,14 @@ static NSString *const cellID = @"cellID";
 
 @implementation WXChatDetailController
 
++ (instancetype)chatDetailVCWithChatter:(NSString *)chatter chatType:(EMConversationType)type {
+    WXChatDetailController *cdVC = [[WXChatDetailController alloc] init];
+    cdVC.chatter = chatter;
+    cdVC.chatType = type;
+    cdVC.hidesBottomBarWhenPushed = YES;
+    return cdVC;
+}
+
 #pragma mark - Lazy Load
 
 - (UIView *)inputView {
@@ -86,9 +94,18 @@ static NSString *const cellID = @"cellID";
 }
 
 #pragma mark - setter
-- (void)setUserName:(NSString *)userName {
-    _userName = userName;
-    self.title = userName;
+
+- (void)setChatter:(NSString *)chatter {
+    _chatter = chatter;
+    self.title = chatter;
+}
+
+- (void)setChatType:(EMConversationType)chatType {
+    _chatType = chatType;
+    if (chatType == eConversationTypeGroupChat) {
+        EMGroup *group = [[EaseMob sharedInstance].chatManager fetchGroupInfo:self.chatter error:nil];
+        self.title = [NSString stringWithFormat:@"%@(%ld)",group.groupSubject,group.groupOccupantsCount];
+    }
 }
 
 #pragma mark - Life Cycle
@@ -150,7 +167,7 @@ static NSString *const cellID = @"cellID";
     [self.chatImages removeAllObjects];
     [self.chatThumbnailImages removeAllObjects];
     
-    EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.userName conversationType:eConversationTypeChat];
+    EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.chatter conversationType:self.chatType];
     NSArray *msgs = [conversation loadAllMessages];
     for (EMMessage *msg in msgs) {
         WXChatItem *item = [[WXChatItem alloc] init];
@@ -185,7 +202,7 @@ static NSString *const cellID = @"cellID";
 
 - (void)setUpRecorder {
     NSInteger nowTime = (NSInteger)[[NSDate date] timeIntervalSince1970];
-    NSString *fileName = [NSString stringWithFormat:@"%@%ld.caf",self.userName,nowTime];
+    NSString *fileName = [NSString stringWithFormat:@"%@%ld.caf",self.chatter,nowTime];
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
     NSURL *url = [NSURL fileURLWithPath:path];
     
@@ -199,7 +216,7 @@ static NSString *const cellID = @"cellID";
     EMChatVoice *chatVoice = [[EMChatVoice alloc] initWithFile:self.recorder.url.path displayName:@"语音消息"];
     chatVoice.duration = self.voiceDuration;
     EMVoiceMessageBody *voiceMsg = [[EMVoiceMessageBody alloc] initWithChatObject:chatVoice];
-    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.userName bodies:@[voiceMsg]];
+    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.chatter bodies:@[voiceMsg]];
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:nil onQueue:nil completion:^(EMMessage *message, EMError *error) {
         if (!error) {
             [self loadChatMessages];
@@ -239,7 +256,7 @@ static NSString *const cellID = @"cellID";
     
     EMChatText *text = [[EMChatText alloc] initWithText:textField.text];
     EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:text];
-    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.userName bodies:@[body]];
+    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.chatter bodies:@[body]];
     
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
         
@@ -307,7 +324,7 @@ static NSString *const cellID = @"cellID";
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         EMChatImage *chatImage = [[EMChatImage alloc] initWithUIImage:image displayName:@"nothing"];
         EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithImage:chatImage thumbnailImage:chatImage];
-        EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.userName bodies:@[body]];
+        EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.chatter bodies:@[body]];
         
         [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
             

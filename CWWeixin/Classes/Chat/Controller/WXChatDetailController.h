@@ -10,8 +10,12 @@
 
 @interface WXChatDetailController : UIViewController
 
-//@property (strong, nonatomic) EMBuddy *buddy;
 
-@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *chatter;
+
+@property (assign, nonatomic) EMConversationType chatType;
+
+
++ (instancetype)chatDetailVCWithChatter:(NSString *)chatter chatType:(EMConversationType)type;
 
 @end

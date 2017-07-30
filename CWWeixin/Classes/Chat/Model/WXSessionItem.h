@@ -20,6 +20,7 @@
 
 @property (assign, nonatomic) NSUInteger unreadBadgeValue;
 
+
 + (instancetype)itemWithConversation:(EMConversation *)conversation;
 
 @end

@@ -10,6 +10,7 @@
 #import "WXContactCell.h"
 #import "WXGroupItem.h"
 #import <SVProgressHUD.h>
+#import "WXChatDetailController.h"
 
 static NSString *const cellID = @"WXGroupCellID";
 
@@ -58,6 +59,17 @@ static NSString *const cellID = @"WXGroupCellID";
     cell.groupItem = [WXGroupItem itemWithEMGroup:self.groups[indexPath.row]];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    WXChatDetailController *groupChatVC = [WXChatDetailController chatDetailVCWithChatter:[self.groups[indexPath.row] groupId] chatType:eConversationTypeGroupChat];
+    
+    UITabBarController *tabVC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    tabVC.selectedIndex = 0;
+    
+    UINavigationController *weChatNavVC = tabVC.viewControllers[0];
+    [weChatNavVC showViewController:groupChatVC sender:nil];
+    
 }
 
 - (void)reloadGroupList {

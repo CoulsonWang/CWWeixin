@@ -59,9 +59,7 @@
     self.navigationController.tabBarController.selectedIndex = 0;
     UINavigationController *weChatNavVC = self.navigationController.tabBarController.selectedViewController;
     
-    WXChatDetailController *chatDetailVC = [[WXChatDetailController alloc] init];
-    chatDetailVC.hidesBottomBarWhenPushed = YES;
-    chatDetailVC.userName = self.buddy.username;
+    WXChatDetailController *chatDetailVC = [WXChatDetailController chatDetailVCWithChatter:self.buddy.username chatType:eConversationTypeChat];
     
     [self.navigationController popViewControllerAnimated:NO];
     
