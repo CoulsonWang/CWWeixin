@@ -13,5 +13,6 @@ pod 'AFNetwork', '~> 0.1.0'
 pod 'SVProgressHUD', '~> 2.1.2'
 pod 'Masonry', '~> 1.0.2'
 pod 'MWPhotoBrowser', '~> 2.1.2'
+pod 'SCLAlertView-Objective-C', '~> 1.1.2'
 
 end
