@@ -22,6 +22,8 @@ static NSString *const cellID = @"WXSessionCellID";
 
 @property (strong, nonatomic) NSMutableArray<EMConversation *> *conversations;
 
+@property (assign, nonatomic) NSUInteger lastUnreadMessagesCount;
+
 @end
 
 @implementation WXChatController
@@ -47,11 +49,11 @@ static NSString *const cellID = @"WXSessionCellID";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXSessionCell class]) bundle:nil] forCellReuseIdentifier:cellID];
     self.tableView.rowHeight = 80;
     
-    [self reloadConversations];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self reloadConversations];
     [self updateBadgeValue];
 }
 
@@ -125,6 +127,11 @@ static NSString *const cellID = @"WXSessionCellID";
         default:
             break;
     }
+}
+
+- (void)didReceiveMessage:(EMMessage *)message {
+    [self reloadConversations];
+    [self updateBadgeValue];
 }
 
 - (void)didUpdateConversationList:(NSArray *)conversationList {

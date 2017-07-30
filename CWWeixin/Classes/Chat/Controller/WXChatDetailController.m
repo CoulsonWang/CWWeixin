@@ -112,9 +112,14 @@ static NSString *const cellID = @"cellID";
     [self setUpNotification];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadChatMessages];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self loadChatMessages];
+    
 }
 
 - (void)dealloc {

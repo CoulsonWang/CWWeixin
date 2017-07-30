@@ -36,14 +36,6 @@
     self.hidden = YES;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (void)setBadgeValue:(NSUInteger)badgeValue {
     _badgeValue = badgeValue;
