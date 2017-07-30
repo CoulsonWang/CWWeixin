@@ -38,7 +38,10 @@
     [self.contentButton setBackgroundImage:[item.contentTextBackgroundImage imageWithStretch] forState:UIControlStateNormal];
     [self.contentButton setBackgroundImage:[item.contentTextBackgroundHighlightImage imageWithStretch] forState:UIControlStateHighlighted];
     self.durationLabel.hidden = (item.chatType != WXChatTypeVoice);
+    
     [self.contentButton setImage:nil forState:UIControlStateNormal];
+    [self.contentButton setTitle:nil forState:UIControlStateNormal];
+    
     switch (item.chatType) {
         case WXChatTypeText:{
             [self.contentButton setTitle:item.contentText forState:UIControlStateNormal];

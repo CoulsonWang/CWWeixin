@@ -99,7 +99,8 @@ static NSString *const cellID = @"cellID";
     self.chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.chatTableView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
     self.chatTableView.allowsSelection = NO;
-    
+    self.chatTableView.contentInset = UIEdgeInsetsMake(70, 0, 0, 0);
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.inputView.tag = 1;
     
