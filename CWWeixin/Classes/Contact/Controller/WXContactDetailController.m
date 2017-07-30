@@ -61,7 +61,7 @@
     
     WXChatDetailController *chatDetailVC = [[WXChatDetailController alloc] init];
     chatDetailVC.hidesBottomBarWhenPushed = YES;
-    chatDetailVC.buddy = self.buddy;
+    chatDetailVC.userName = self.buddy.username;
     
     [self.navigationController popViewControllerAnimated:NO];
     

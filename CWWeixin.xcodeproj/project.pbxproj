@@ -25,6 +25,8 @@
 		B97CDACD1F2A2623004D2185 /* WXLongPressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDACC1F2A2623004D2185 /* WXLongPressButton.m */; };
 		B97CDAD01F2A2822004D2185 /* WXChatFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B97CDACF1F2A2822004D2185 /* WXChatFrame.m */; };
 		B9B227E91F2CE72800715218 /* WXMusicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B227E81F2CE72800715218 /* WXMusicTool.m */; };
+		B9B227ED1F2DCCE400715218 /* WXSessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B227EB1F2DCCE400715218 /* WXSessionCell.m */; };
+		B9B227EE1F2DCCE400715218 /* WXSessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9B227EC1F2DCCE400715218 /* WXSessionCell.xib */; };
 		B9EE022F1F287144002F3075 /* WXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE022E1F287144002F3075 /* WXTabBarController.m */; };
 		B9EE02331F287302002F3075 /* WXLogRegistController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EE02311F287302002F3075 /* WXLogRegistController.m */; };
 		B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EE02321F287302002F3075 /* WXLogRegistController.xib */; };
@@ -72,6 +74,9 @@
 		B97CDACF1F2A2822004D2185 /* WXChatFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXChatFrame.m; sourceTree = "<group>"; };
 		B9B227E71F2CE72800715218 /* WXMusicTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMusicTool.h; sourceTree = "<group>"; };
 		B9B227E81F2CE72800715218 /* WXMusicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMusicTool.m; sourceTree = "<group>"; };
+		B9B227EA1F2DCCE400715218 /* WXSessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSessionCell.h; sourceTree = "<group>"; };
+		B9B227EB1F2DCCE400715218 /* WXSessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSessionCell.m; sourceTree = "<group>"; };
+		B9B227EC1F2DCCE400715218 /* WXSessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXSessionCell.xib; sourceTree = "<group>"; };
 		B9EE022D1F287144002F3075 /* WXTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXTabBarController.h; sourceTree = "<group>"; };
 		B9EE022E1F287144002F3075 /* WXTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXTabBarController.m; sourceTree = "<group>"; };
 		B9EE02301F287302002F3075 /* WXLogRegistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXLogRegistController.h; sourceTree = "<group>"; };
@@ -220,6 +225,9 @@
 				B97CDAC01F2A1D0C004D2185 /* WXChatCell.m */,
 				B97CDACB1F2A2623004D2185 /* WXLongPressButton.h */,
 				B97CDACC1F2A2623004D2185 /* WXLongPressButton.m */,
+				B9B227EA1F2DCCE400715218 /* WXSessionCell.h */,
+				B9B227EB1F2DCCE400715218 /* WXSessionCell.m */,
+				B9B227EC1F2DCCE400715218 /* WXSessionCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -563,6 +571,7 @@
 				B9752F111F2789C700316148 /* LaunchScreen.storyboard in Resources */,
 				B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */,
 				B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */,
+				B9B227EE1F2DCCE400715218 /* WXSessionCell.xib in Resources */,
 				B9752F0C1F2789C700316148 /* Main.storyboard in Resources */,
 				B97CDAB31F29C555004D2185 /* WXContactDetailController.storyboard in Resources */,
 			);
@@ -640,6 +649,7 @@
 				B97CDAD01F2A2822004D2185 /* WXChatFrame.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,
 				B97CDAB61F29C85E004D2185 /* UIImage+WXCreateColorImage.m in Sources */,
+				B9B227ED1F2DCCE400715218 /* WXSessionCell.m in Sources */,
 				B9EE02421F288308002F3075 /* WXMeController.m in Sources */,
 				B9EE024C1F28A454002F3075 /* WXContactController.m in Sources */,
 				B9B227E91F2CE72800715218 /* WXMusicTool.m in Sources */,

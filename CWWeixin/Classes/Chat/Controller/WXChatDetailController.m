@@ -86,9 +86,9 @@ static NSString *const cellID = @"cellID";
 }
 
 #pragma mark - setter
-- (void)setBuddy:(EMBuddy *)buddy {
-    _buddy = buddy;
-    self.title = buddy.username;
+- (void)setUserName:(NSString *)userName {
+    _userName = userName;
+    self.title = userName;
 }
 
 #pragma mark - Life Cycle
@@ -144,7 +144,7 @@ static NSString *const cellID = @"cellID";
     [self.chatImages removeAllObjects];
     [self.chatThumbnailImages removeAllObjects];
     
-    EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.buddy.username conversationType:eConversationTypeChat];
+    EMConversation *conversation = [[EaseMob sharedInstance].chatManager conversationForChatter:self.userName conversationType:eConversationTypeChat];
     NSArray *msgs = [conversation loadAllMessages];
     for (EMMessage *msg in msgs) {
         WXChatItem *item = [[WXChatItem alloc] init];
@@ -163,6 +163,8 @@ static NSString *const cellID = @"cellID";
         }
     }
     
+    [conversation markAllMessagesAsRead:YES];
+    
     [self.chatTableView reloadData];
     [self scrollTheTableView];
 }
@@ -177,7 +179,7 @@ static NSString *const cellID = @"cellID";
 
 - (void)setUpRecorder {
     NSInteger nowTime = (NSInteger)[[NSDate date] timeIntervalSince1970];
-    NSString *fileName = [NSString stringWithFormat:@"%@%ld.caf",self.buddy.username,nowTime];
+    NSString *fileName = [NSString stringWithFormat:@"%@%ld.caf",self.userName,nowTime];
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
     NSURL *url = [NSURL fileURLWithPath:path];
     
@@ -191,7 +193,7 @@ static NSString *const cellID = @"cellID";
     EMChatVoice *chatVoice = [[EMChatVoice alloc] initWithFile:self.recorder.url.path displayName:@"语音消息"];
     chatVoice.duration = self.voiceDuration;
     EMVoiceMessageBody *voiceMsg = [[EMVoiceMessageBody alloc] initWithChatObject:chatVoice];
-    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[voiceMsg]];
+    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.userName bodies:@[voiceMsg]];
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:nil onQueue:nil completion:^(EMMessage *message, EMError *error) {
         if (!error) {
             [self loadChatMessages];
@@ -231,7 +233,7 @@ static NSString *const cellID = @"cellID";
     
     EMChatText *text = [[EMChatText alloc] initWithText:textField.text];
     EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:text];
-    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
+    EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.userName bodies:@[body]];
     
     [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
         
@@ -299,7 +301,7 @@ static NSString *const cellID = @"cellID";
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         EMChatImage *chatImage = [[EMChatImage alloc] initWithUIImage:image displayName:@"nothing"];
         EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithImage:chatImage thumbnailImage:chatImage];
-        EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.buddy.username bodies:@[body]];
+        EMMessage *msg = [[EMMessage alloc] initWithReceiver:self.userName bodies:@[body]];
         
         [[EaseMob sharedInstance].chatManager asyncSendMessage:msg progress:nil prepare:^(EMMessage *message, EMError *error) {
             
