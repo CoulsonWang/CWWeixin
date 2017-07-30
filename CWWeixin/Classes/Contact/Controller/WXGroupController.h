@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WXGroupController : UIViewController
+@interface WXGroupController : UITableViewController
 
 @end

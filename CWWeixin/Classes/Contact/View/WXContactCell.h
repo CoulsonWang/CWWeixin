@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class WXContactHeaderItem;
+@class WXGroupItem;
 
 @interface WXContactCell : UITableViewCell
 
 @property (strong, nonatomic) EMBuddy *buddy;
 
 @property (strong, nonatomic) WXContactHeaderItem *headerItem;
+
+@property (strong, nonatomic) WXGroupItem *groupItem;
 
 @end

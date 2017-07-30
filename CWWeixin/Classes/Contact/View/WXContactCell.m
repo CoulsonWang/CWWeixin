@@ -8,6 +8,7 @@
 
 #import "WXContactCell.h"
 #import "WXContactHeaderItem.h"
+#import "WXGroupItem.h"
 
 @interface WXContactCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *userIconImageView;
@@ -27,6 +28,12 @@
     _buddy = buddy;
     self.userIconImageView.image = [UIImage imageNamed:@"xhr"];
     self.userNameLabel.text = buddy.username;
+}
+
+- (void)setGroupItem:(WXGroupItem *)groupItem {
+    _groupItem = groupItem;
+    self.userIconImageView.image = groupItem.icon;
+    self.userNameLabel.text = groupItem.title;
 }
 
 - (void)awakeFromNib {

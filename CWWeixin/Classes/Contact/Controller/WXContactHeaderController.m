@@ -31,7 +31,7 @@ static NSString *const cellID = @"WXContactHeaderCellID";
 - (NSArray *)headerItems {
     if (!_headerItems) {
         WXContactHeaderItem *item1 = [WXContactHeaderItem itemWithtitle:@"新的朋友" iconName:@"plugins_FriendNotify" controllerClassName:@"UIViewController"];
-        WXContactHeaderItem *item2 = [WXContactHeaderItem itemWithtitle:@"群聊" iconName:@"add_friend_icon_addgroup" controllerClassName:@"UIViewController"];
+        WXContactHeaderItem *item2 = [WXContactHeaderItem itemWithtitle:@"群聊" iconName:@"add_friend_icon_addgroup" controllerClassName:@"WXGroupController"];
         WXContactHeaderItem *item3 = [WXContactHeaderItem itemWithtitle:@"标签" iconName:@"Contact_icon_ContactTag" controllerClassName:@"UIViewController"];
         WXContactHeaderItem *item4 = [WXContactHeaderItem itemWithtitle:@"公众号" iconName:@"add_friend_icon_offical" controllerClassName:@"UIViewController"];
         _headerItems = @[item1,item2,item3,item4];
