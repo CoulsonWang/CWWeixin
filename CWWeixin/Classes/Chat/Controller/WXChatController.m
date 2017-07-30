@@ -8,6 +8,7 @@
 
 #import "WXChatController.h"
 #import "WXSessionCell.h"
+#import "WXSessionItem.h"
 #import "WXChatDetailController.h"
 
 NSString *const WXChatTitleNormal = @"微信";
@@ -44,6 +45,7 @@ static NSString *const cellID = @"WXSessionCellID";
     
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXSessionCell class]) bundle:nil] forCellReuseIdentifier:cellID];
+    self.tableView.rowHeight = 80;
     
     [self reloadConversations];
 }
@@ -82,7 +84,8 @@ static NSString *const cellID = @"WXSessionCellID";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WXSessionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     
-    cell.textLabel.text = self.conversations[indexPath.row].chatter;
+    WXSessionItem *item = [WXSessionItem itemWithConversation:self.conversations[indexPath.row]];
+    cell.item = item;
     
     return cell;
 }

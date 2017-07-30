@@ -1,5 +1,5 @@
 //
-//  WXSessionCell.h
+//  WXSessionBadgeView.h
 //  CWWeixin
 //
 //  Created by Coulson_Wang on 2017/7/30.
@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class WXSessionItem;
+@interface WXSessionBadgeView : UIView
 
-@interface WXSessionCell : UITableViewCell
-
-@property (strong, nonatomic) WXSessionItem *item;
+@property (assign, nonatomic) NSUInteger badgeValue;
 
 @end
