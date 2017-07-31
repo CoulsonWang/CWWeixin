@@ -30,6 +30,7 @@ typedef enum : NSUInteger {
 
 @optional
 - (void)inputViewMoreBtnDidClick:(WXInputView *)inputView;
+- (void)inputView:(WXInputView *)inputView inputTypeDidChangedInto:(WXInputType)type;
 - (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status;
 
 @end

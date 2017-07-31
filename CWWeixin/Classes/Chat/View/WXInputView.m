@@ -61,6 +61,9 @@ typedef enum : NSUInteger {
     }
     
     self.currentInputType = sender.isSelected ? WXInputTypeVoice : WXInputTypeText;
+    if ([self.delegate respondsToSelector:@selector(inputView:inputTypeDidChangedInto:)]) {
+        [self.delegate inputView:self inputTypeDidChangedInto:self.currentInputType];
+    }
 }
 
 #pragma mark - 语音按钮事件

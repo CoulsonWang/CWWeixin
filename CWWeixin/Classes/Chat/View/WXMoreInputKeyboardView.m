@@ -91,9 +91,9 @@
     [self addSubview:btn];
 }
 
-- (void)moreInputButtonClick:(UIButton *)btn {
+- (void)moreInputButtonClick:(WXMoreInputKeyboardButton *)btn {
     if ([self.delegate respondsToSelector:@selector(moreInputKeyboardView:didClickButtonOfType:)]) {
-        
+        [self.delegate moreInputKeyboardView:self didClickButtonOfType:btn.inputType];
     }
 }
 

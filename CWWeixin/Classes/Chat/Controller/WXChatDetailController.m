@@ -13,6 +13,7 @@
 #import "WXChatFrame.h"
 #import "WXMoreInputKeyboardView.h"
 #import "UIView+CWFrame.h"
+#import <SCLAlertView.h>
 #import <MWPhotoBrowser.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -66,7 +67,7 @@ static NSString *const cellID = @"cellID";
 
 - (WXMoreInputKeyboardView *)moreInputKeyboard {
     if (!_moreInputKeyboard) {
-        WXMoreInputKeyboardView *moreInputKeyboard = [[WXMoreInputKeyboardView alloc] initWithFrame:CGRectMake(0, self.view.height, CWScreenW, kWXMoreInputKeyboardViewHeight)];
+        WXMoreInputKeyboardView *moreInputKeyboard = [[WXMoreInputKeyboardView alloc] initWithFrame:CGRectMake(0, CWScreenH, CWScreenW, kWXMoreInputKeyboardViewHeight)];
         [self.view addSubview:moreInputKeyboard];
         _moreInputKeyboard = moreInputKeyboard;
     }
@@ -126,6 +127,8 @@ static NSString *const cellID = @"cellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     [self.chatTableView registerClass:[WXChatCell class] forCellReuseIdentifier:cellID];
     self.chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.chatTableView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
@@ -149,6 +152,7 @@ static NSString *const cellID = @"cellID";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadChatMessages];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -169,7 +173,9 @@ static NSString *const cellID = @"cellID";
         NSTimeInterval duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGFloat endY = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
         [UIView animateWithDuration:duration animations:^{
-            self.view.y = -(CWScreenH - endY);
+//            self.view.y = -(CWScreenH - endY);
+            self.chatTableView.height = CWScreenH - kInputViewHeight - (CWScreenH - endY);
+            self.inputView.y = CWScreenH - kInputViewHeight - (CWScreenH - endY);
         }];
         [self scrollTheTableView];
     }];
@@ -289,31 +295,49 @@ static NSString *const cellID = @"cellID";
     return YES;
 }
 
+#pragma mark - 自定义键盘相关
+
+- (void)showCustomKeyboard {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.chatTableView.height  = CWScreenH - kInputViewHeight - kWXMoreInputKeyboardViewHeight;
+        self.inputView.y = CWScreenH - kInputViewHeight - kWXMoreInputKeyboardViewHeight;
+        self.moreInputKeyboard.y = CWScreenH - kWXMoreInputKeyboardViewHeight;
+    }];
+}
+
+- (void)hideCustomKeyboard {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.chatTableView.height = CWScreenH - kInputViewHeight;
+        self.inputView.y = CWScreenH - kInputViewHeight;
+        self.moreInputKeyboard.y = CWScreenH;
+    }];
+}
+
 #pragma mark - WXInputViewDelegate
 - (void)inputViewMoreBtnDidClick:(WXInputView *)inputView {
-    if (self.view.y == 0) {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.view.y = -kWXMoreInputKeyboardViewHeight;
-        }];
+    if (self.chatTableView.height == CWScreenH - kInputViewHeight) {
+        [self showCustomKeyboard];
     } else {
         if (self.inputView.textField.isEditing) {
             [self.view endEditing:YES];
-            [UIView animateWithDuration:0.25 animations:^{
-                self.view.y = -kWXMoreInputKeyboardViewHeight;
-            }];
-            
+            [self showCustomKeyboard];
         } else {
             if (self.inputView.currentInputType == WXInputTypeText) {
+                [self hideCustomKeyboard];
                 [self.inputView.textField becomeFirstResponder];
             } else {
-                [UIView animateWithDuration:0.25 animations:^{
-                    self.view.y = 0;
-                }];
+                [self hideCustomKeyboard];
             }
             
         }
     }
 
+}
+
+- (void)inputView:(WXInputView *)inputView inputTypeDidChangedInto:(WXInputType)type {
+    if (type == WXInputTypeVoice) {
+        [self hideCustomKeyboard];
+    }
 }
 
 - (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status {
@@ -347,7 +371,30 @@ static NSString *const cellID = @"cellID";
 #pragma mark - WXMoreInputKeyboardViewDelegate
 
 - (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonOfType:(WXMoreInputType)type {
-    
+    switch (type) {
+        case WXMoreInputTypeImage:
+        {
+            UIImagePickerController *pickerVC = [[UIImagePickerController alloc] init];
+            pickerVC.delegate =self;
+            [self presentViewController:pickerVC animated:YES completion:nil];
+        }
+            break;
+        case WXMoreInputTypeVoiceTalk:
+        {
+            SCLAlertView *alertV = [[SCLAlertView alloc] init];
+            
+            [alertV addButton:@"语音聊天" actionBlock:^{
+                
+            }];
+            
+            [alertV addButton:@"视频聊天" actionBlock:^{
+                
+            }];
+            
+            [alertV showSuccess:@"选择聊天方式" subTitle:@"可以选择语音聊天或视频聊天" closeButtonTitle:@"关闭" duration:0.0f];
+        }
+            break;
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
