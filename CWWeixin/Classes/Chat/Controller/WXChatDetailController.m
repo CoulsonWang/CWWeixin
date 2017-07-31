@@ -381,7 +381,9 @@ static NSString *const cellID = @"cellID";
             break;
         case WXMoreInputTypeVoiceTalk:
         {
+            
             SCLAlertView *alertV = [[SCLAlertView alloc] init];
+            alertV.showAnimationType = SCLAlertViewShowAnimationSlideInFromBottom;
             
             [alertV addButton:@"语音聊天" actionBlock:^{
                 
@@ -391,7 +393,7 @@ static NSString *const cellID = @"cellID";
                 
             }];
             
-            [alertV showSuccess:@"选择聊天方式" subTitle:@"可以选择语音聊天或视频聊天" closeButtonTitle:@"关闭" duration:0.0f];
+            [alertV showSuccess:self title:@"选择聊天方式" subTitle:@"可以选择语音聊天或视频聊天" closeButtonTitle:@"关闭" duration:2.0f];
         }
             break;
     }
