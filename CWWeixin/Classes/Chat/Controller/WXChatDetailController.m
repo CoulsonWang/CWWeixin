@@ -13,15 +13,17 @@
 #import "WXChatFrame.h"
 #import "WXMoreInputKeyboardView.h"
 #import "UIView+CWFrame.h"
+#import "WXVoiceCallController.h"
 #import <SCLAlertView.h>
 #import <MWPhotoBrowser.h>
 #import <AVFoundation/AVFoundation.h>
+#import <SVProgressHUD.h>
 
 #define kInputViewHeight 44.0
 
 static NSString *const cellID = @"cellID";
 
-@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate, MWPhotoBrowserDelegate, WXMoreInputKeyboardViewDelegate>
+@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate, MWPhotoBrowserDelegate, WXMoreInputKeyboardViewDelegate, EMCallManagerDelegate>
 
 @property (weak, nonatomic) UITableView *chatTableView;
 
@@ -142,6 +144,8 @@ static NSString *const cellID = @"cellID";
     
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
+    [[EaseMob sharedInstance].callManager addDelegate:self delegateQueue:nil];
+    
     [self loadChatMessages];
     
     [self setUpNotification];
@@ -162,6 +166,8 @@ static NSString *const cellID = @"cellID";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
 }
 #pragma mark - 私有方法
 - (void)rightBarButtonItemClick {
@@ -385,8 +391,13 @@ static NSString *const cellID = @"cellID";
             SCLAlertView *alertV = [[SCLAlertView alloc] init];
             alertV.showAnimationType = SCLAlertViewShowAnimationSlideInFromBottom;
             
+            __weak typeof(self) weakSelf = self;
             [alertV addButton:@"语音聊天" actionBlock:^{
-                
+                EMError *error;
+                [[EaseMob sharedInstance].callManager asyncMakeVoiceCall:weakSelf.chatter timeout:0 error:&error];
+                if (error) {
+                    [SVProgressHUD showErrorWithStatus:@"发起语音聊天失败"];
+                }
             }];
             
             [alertV addButton:@"视频聊天" actionBlock:^{
@@ -462,5 +473,29 @@ static NSString *const cellID = @"cellID";
 - (void)didReceiveOfflineMessages:(NSArray *)offlineMessages {
     [self loadChatMessages];
 }
+
+#pragma mark - 语音通话代理方法
+
+- (void)callSessionStatusChanged:(EMCallSession *)callSession changeReason:(EMCallStatusChangedReason)reason error:(EMError *)error {
+    /*!
+     @enum
+     @brief 实时通话状态
+     @constant eCallSessionStatusDisconnected 通话没开始
+     @constant eCallSessionStatusRinging 通话响铃
+     @constant eCallSessionStatusAnswering 通话双方正在协商
+     @constant eCallSessionStatusPausing 通话暂停
+     @constant eCallSessionStatusConnecting 通话已经准备好，等待接听
+     @constant eCallSessionStatusConnected 通话已连接
+     @constant eCallSessionStatusAccepted 通话双方同意协商
+     */
+    if (callSession.status == eCallSessionStatusConnected) {
+        WXVoiceCallController *callVC = [[WXVoiceCallController alloc] init];
+        callVC.session = callSession;
+        
+        [self presentViewController:callVC animated:YES completion:nil];
+    }
+}
+
+
 
 @end

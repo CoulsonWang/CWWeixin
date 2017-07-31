@@ -11,6 +11,8 @@
 		B963DF181F2EF27A009D1378 /* WXMoreInputKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */; };
 		B963DF1B1F2EFD83009D1378 /* UIView+CWFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */; };
 		B963DF1E1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF1D1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m */; };
+		B963DF221F2F3D72009D1378 /* WXVoiceCallController.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF201F2F3D72009D1378 /* WXVoiceCallController.m */; };
+		B963DF231F2F3D72009D1378 /* WXVoiceCallController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B963DF211F2F3D72009D1378 /* WXVoiceCallController.xib */; };
 		B9752F031F2789C700316148 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9752F021F2789C700316148 /* main.m */; };
 		B9752F0C1F2789C700316148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0A1F2789C700316148 /* Main.storyboard */; };
 		B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0D1F2789C700316148 /* Assets.xcassets */; };
@@ -59,6 +61,9 @@
 		B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CWFrame.m"; sourceTree = "<group>"; };
 		B963DF1C1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMoreInputKeyboardButton.h; sourceTree = "<group>"; };
 		B963DF1D1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMoreInputKeyboardButton.m; sourceTree = "<group>"; };
+		B963DF1F1F2F3D72009D1378 /* WXVoiceCallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXVoiceCallController.h; sourceTree = "<group>"; };
+		B963DF201F2F3D72009D1378 /* WXVoiceCallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXVoiceCallController.m; sourceTree = "<group>"; };
+		B963DF211F2F3D72009D1378 /* WXVoiceCallController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXVoiceCallController.xib; sourceTree = "<group>"; };
 		B9752EFE1F2789C700316148 /* CWWeixin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeixin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9752F021F2789C700316148 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9752F0B1F2789C700316148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -227,6 +232,9 @@
 				B9EE02481F289B38002F3075 /* WXChatController.m */,
 				B97CDAB71F29D24F004D2185 /* WXChatDetailController.h */,
 				B97CDAB81F29D24F004D2185 /* WXChatDetailController.m */,
+				B963DF1F1F2F3D72009D1378 /* WXVoiceCallController.h */,
+				B963DF201F2F3D72009D1378 /* WXVoiceCallController.m */,
+				B963DF211F2F3D72009D1378 /* WXVoiceCallController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -616,6 +624,7 @@
 				B9752F111F2789C700316148 /* LaunchScreen.storyboard in Resources */,
 				B9EE02341F287302002F3075 /* WXLogRegistController.xib in Resources */,
 				B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */,
+				B963DF231F2F3D72009D1378 /* WXVoiceCallController.xib in Resources */,
 				B9B227EE1F2DCCE400715218 /* WXSessionCell.xib in Resources */,
 				B9752F0C1F2789C700316148 /* Main.storyboard in Resources */,
 				B97CDAB31F29C555004D2185 /* WXContactDetailController.storyboard in Resources */,
@@ -700,6 +709,7 @@
 				B963DF181F2EF27A009D1378 /* WXMoreInputKeyboardView.m in Sources */,
 				B97CDAB11F29C548004D2185 /* WXContactDetailController.m in Sources */,
 				B97CDAD01F2A2822004D2185 /* WXChatFrame.m in Sources */,
+				B963DF221F2F3D72009D1378 /* WXVoiceCallController.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,
 				B97CDAB61F29C85E004D2185 /* UIImage+WXCreateColorImage.m in Sources */,
 				B9B227ED1F2DCCE400715218 /* WXSessionCell.m in Sources */,

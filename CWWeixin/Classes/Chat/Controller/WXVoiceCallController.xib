@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXVoiceCallController">
+            <connections>
+                <outlet property="cancleButton" destination="SbW-dk-xWz" id="qXb-aw-NsS"/>
+                <outlet property="iconImageView" destination="w6u-4i-fsK" id="yXG-AQ-f63"/>
+                <outlet property="statusLabel" destination="N9U-c2-Skf" id="YDD-OZ-yGI"/>
+                <outlet property="userNameLabel" destination="YlU-6s-2KO" id="TvL-8p-kMf"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbW-dk-xWz">
+                    <rect key="frame" x="167" y="470" width="80" height="80"/>
+                    <color key="backgroundColor" red="0.96255987880000005" green="0.092868840480000006" blue="0.1156865693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="V3D-Vo-Tnz"/>
+                        <constraint firstAttribute="height" constant="80" id="Xk9-Oe-zHa"/>
+                    </constraints>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cancleButtonClick:" destination="-1" eventType="touchUpInside" id="liu-FC-dOi"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xhr" translatesAutoresizingMaskIntoConstraints="NO" id="w6u-4i-fsK">
+                    <rect key="frame" x="147" y="130" width="120" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="OgA-J1-LOb"/>
+                        <constraint firstAttribute="height" constant="120" id="Xku-q7-MAf"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YlU-6s-2KO">
+                    <rect key="frame" x="166" y="280" width="83" height="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在等待对方接受..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9U-c2-Skf">
+                    <rect key="frame" x="139" y="332" width="136" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="YlU-6s-2KO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="45k-8B-XaU"/>
+                <constraint firstItem="SbW-dk-xWz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8vf-lJ-e7p"/>
+                <constraint firstItem="w6u-4i-fsK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Byw-0s-IwY"/>
+                <constraint firstItem="N9U-c2-Skf" firstAttribute="top" secondItem="YlU-6s-2KO" secondAttribute="bottom" constant="30" id="IMe-Ez-WJr"/>
+                <constraint firstItem="w6u-4i-fsK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="130" id="LNb-ug-ezd"/>
+                <constraint firstItem="SbW-dk-xWz" firstAttribute="top" secondItem="N9U-c2-Skf" secondAttribute="bottom" constant="120" id="eNC-MV-z4k"/>
+                <constraint firstItem="YlU-6s-2KO" firstAttribute="top" secondItem="w6u-4i-fsK" secondAttribute="bottom" constant="30" id="jwD-TJ-JEP"/>
+                <constraint firstItem="N9U-c2-Skf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rV4-6T-k4a"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="xhr" width="300" height="300"/>
+    </resources>
+</document>
