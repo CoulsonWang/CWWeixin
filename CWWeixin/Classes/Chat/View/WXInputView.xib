@@ -22,6 +22,13 @@
                         <constraint firstAttribute="height" constant="1" id="CKB-Zz-A3z"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQB-mN-mJi">
+                    <rect key="frame" x="0.0" y="43" width="524" height="1"/>
+                    <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="3m0-lE-bcj"/>
+                    </constraints>
+                </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="axz-yM-cue">
                     <rect key="frame" x="38" y="5" width="413" height="34"/>
                     <nil key="textColor"/>
@@ -87,6 +94,9 @@
                 <constraint firstItem="DeY-qe-xMR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HhG-2M-hfj"/>
                 <constraint firstItem="axz-yM-cue" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="InN-lF-gyT"/>
                 <constraint firstItem="axz-yM-cue" firstAttribute="leading" secondItem="z2P-ga-PCt" secondAttribute="trailing" constant="3" id="Jm6-VW-tvz"/>
+                <constraint firstAttribute="bottom" secondItem="JQB-mN-mJi" secondAttribute="bottom" id="Mnv-D2-P96"/>
+                <constraint firstItem="JQB-mN-mJi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QD3-cX-2Yb"/>
+                <constraint firstAttribute="trailing" secondItem="JQB-mN-mJi" secondAttribute="trailing" id="Rzd-Cn-87F"/>
                 <constraint firstAttribute="trailing" secondItem="YQf-H6-927" secondAttribute="trailing" id="cCE-r9-toN"/>
                 <constraint firstAttribute="bottom" secondItem="axz-yM-cue" secondAttribute="bottom" constant="5" id="ewW-OH-rVG"/>
                 <constraint firstItem="DeY-qe-xMR" firstAttribute="leading" secondItem="z2P-ga-PCt" secondAttribute="trailing" constant="3" id="gWF-2N-qh2"/>

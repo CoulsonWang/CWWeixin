@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		046ABEE7723BCD71268EB1F2 /* libPods-CWWeixin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B56F4BFC49E462EF02D5650 /* libPods-CWWeixin.a */; };
+		B963DF181F2EF27A009D1378 /* WXMoreInputKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */; };
+		B963DF1B1F2EFD83009D1378 /* UIView+CWFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */; };
 		B9752F031F2789C700316148 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9752F021F2789C700316148 /* main.m */; };
 		B9752F0C1F2789C700316148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0A1F2789C700316148 /* Main.storyboard */; };
 		B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0D1F2789C700316148 /* Assets.xcassets */; };
@@ -50,6 +52,10 @@
 		04DA4B3AC0C579E2574A81DA /* Pods-CWWeixin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeixin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeixin/Pods-CWWeixin.debug.xcconfig"; sourceTree = "<group>"; };
 		77046726881F6D9A6C28157E /* Pods-CWWeixin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWWeixin.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWWeixin/Pods-CWWeixin.release.xcconfig"; sourceTree = "<group>"; };
 		9B56F4BFC49E462EF02D5650 /* libPods-CWWeixin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CWWeixin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B963DF161F2EF27A009D1378 /* WXMoreInputKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMoreInputKeyboardView.h; sourceTree = "<group>"; };
+		B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMoreInputKeyboardView.m; sourceTree = "<group>"; };
+		B963DF191F2EFD83009D1378 /* UIView+CWFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CWFrame.h"; sourceTree = "<group>"; };
+		B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CWFrame.m"; sourceTree = "<group>"; };
 		B9752EFE1F2789C700316148 /* CWWeixin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeixin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9752F021F2789C700316148 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9752F0B1F2789C700316148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -250,6 +256,8 @@
 				B9B227EC1F2DCCE400715218 /* WXSessionCell.xib */,
 				B9B227F21F2DDE9F00715218 /* WXSessionBadgeView.h */,
 				B9B227F31F2DDE9F00715218 /* WXSessionBadgeView.m */,
+				B963DF161F2EF27A009D1378 /* WXMoreInputKeyboardView.h */,
+				B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -453,6 +461,8 @@
 		B9EE02271F2870F9002F3075 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				B963DF191F2EFD83009D1378 /* UIView+CWFrame.h */,
+				B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */,
 				B9EE023C1F287612002F3075 /* UINavigationBar+WXBackground.h */,
 				B9EE023D1F287612002F3075 /* UINavigationBar+WXBackground.m */,
 				B97CDAB41F29C85E004D2185 /* UIImage+WXCreateColorImage.h */,
@@ -672,6 +682,7 @@
 				B97CDAB91F29D24F004D2185 /* WXChatDetailController.m in Sources */,
 				B97CDACA1F2A224D004D2185 /* NSString+WXTimestamp.m in Sources */,
 				B9EE023B1F287374002F3075 /* WXNavigationController.m in Sources */,
+				B963DF1B1F2EFD83009D1378 /* UIView+CWFrame.m in Sources */,
 				B9752F511F279D8500316148 /* AppDelegate.m in Sources */,
 				B9B228031F2E03CA00715218 /* WXGroupItem.m in Sources */,
 				B97CDAC11F2A1D0C004D2185 /* WXChatCell.m in Sources */,
@@ -680,6 +691,7 @@
 				B9EE023E1F287612002F3075 /* UINavigationBar+WXBackground.m in Sources */,
 				B97CDABC1F29D477004D2185 /* WXInputView.m in Sources */,
 				B9EE02451F28870C002F3075 /* WXMeSettingController.m in Sources */,
+				B963DF181F2EF27A009D1378 /* WXMoreInputKeyboardView.m in Sources */,
 				B97CDAB11F29C548004D2185 /* WXContactDetailController.m in Sources */,
 				B97CDAD01F2A2822004D2185 /* WXChatFrame.m in Sources */,
 				B9752F031F2789C700316148 /* main.m in Sources */,

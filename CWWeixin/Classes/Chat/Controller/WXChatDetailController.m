@@ -11,6 +11,8 @@
 #import "WXChatCell.h"
 #import "WXChatItem.h"
 #import "WXChatFrame.h"
+#import "WXMoreInputKeyboardView.h"
+#import "UIView+CWFrame.h"
 #import <MWPhotoBrowser.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -23,6 +25,8 @@ static NSString *const cellID = @"cellID";
 @property (weak, nonatomic) UITableView *chatTableView;
 
 @property (weak, nonatomic) WXInputView *inputView;
+
+@property (weak, nonatomic) WXMoreInputKeyboardView *moreInputKeyboard;
 
 @property (strong, nonatomic) NSMutableArray<WXChatFrame *> *chatMsgs;
 
@@ -58,6 +62,15 @@ static NSString *const cellID = @"cellID";
     }
     
     return _inputView;
+}
+
+- (WXMoreInputKeyboardView *)moreInputKeyboard {
+    if (!_moreInputKeyboard) {
+        WXMoreInputKeyboardView *moreInputKeyboard = [[WXMoreInputKeyboardView alloc] initWithFrame:CGRectMake(0, self.view.height, CWScreenW, kWXMoreInputKeyboardViewHeight)];
+        [self.view addSubview:moreInputKeyboard];
+        _moreInputKeyboard = moreInputKeyboard;
+    }
+    return _moreInputKeyboard;
 }
 
 - (UITableView *)chatTableView {
@@ -128,6 +141,8 @@ static NSString *const cellID = @"cellID";
     [self loadChatMessages];
     
     [self setUpNotification];
+    
+    [self moreInputKeyboard];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -152,10 +167,8 @@ static NSString *const cellID = @"cellID";
     [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillChangeFrameNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         NSTimeInterval duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGFloat endY = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
-        CGFloat inputY = endY - self.inputView.bounds.size.height;
         [UIView animateWithDuration:duration animations:^{
-            self.chatTableView.frame = CGRectMake(0, 0, CWScreenW, inputY);
-            self.inputView.frame = CGRectMake(0, inputY, CWScreenW, kInputViewHeight);
+            self.view.y = -(CWScreenH - endY);
         }];
         [self scrollTheTableView];
     }];
@@ -249,6 +262,9 @@ static NSString *const cellID = @"cellID";
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.y = 0;
+    }];
 }
 
 #pragma mark - UITextFieldDelegate 
@@ -274,17 +290,33 @@ static NSString *const cellID = @"cellID";
 
 #pragma mark - WXInputViewDelegate
 - (void)inputView:(WXInputView *)inputView moreBtnDidClickWithStyle:(WXInputViewMoreStyle)style {
-    switch (style) {
-        case WXInputViewMoreStyleImage:
-        {
-            UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
-            pickVC.delegate = self;
-            [self presentViewController:pickVC animated:YES completion:nil];
+    
+    if (self.view.y == 0) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.view.y = -kWXMoreInputKeyboardViewHeight;
+        }];
+    } else {
+        if (self.inputView.textField.isEditing) {
+            [self.view endEditing:YES];
+            [UIView animateWithDuration:0.25 animations:^{
+                self.view.y = -kWXMoreInputKeyboardViewHeight;
+            }];
+        } else {
+            [self.inputView.textField becomeFirstResponder];
         }
-            break;
-        default:
-            break;
+        
     }
+//    switch (style) {
+//        case WXInputViewMoreStyleImage:
+//        {
+//            UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
+//            pickVC.delegate = self;
+//            [self presentViewController:pickVC animated:YES completion:nil];
+//        }
+//            break;
+//        default:
+//            break;
+//    }
 }
 
 - (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status {
