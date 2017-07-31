@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class WXMoreInputKeyboardView;
+
+@protocol WXMoreInputKeyboardViewDelegate <NSObject>
+
+- (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonAtIndex:(NSInteger)index;
+
+@end
+
 #define kWXMoreInputKeyboardViewHeight 200.0
 
 @interface WXMoreInputKeyboardView : UIView
+
+@property (weak, nonatomic) id<WXMoreInputKeyboardViewDelegate> delegate;
 
 @end

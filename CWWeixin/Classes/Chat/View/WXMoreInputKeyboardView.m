@@ -72,10 +72,14 @@
 }
 
 - (void)setUpOneButtonWithTitle:(NSString *)title {
+    
+    static int i = 0;
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    btn.tag = ++i;
     [btn addTarget:self action:@selector(moreInputButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.buttons addObject:btn];
@@ -83,7 +87,9 @@
 }
 
 - (void)moreInputButtonClick:(UIButton *)btn {
-    
+    if ([self.delegate respondsToSelector:@selector(moreInputKeyboardView:didClickButtonAtIndex:)]) {
+        [self.delegate moreInputKeyboardView:self didClickButtonAtIndex:btn.tag];
+    }
 }
 
 @end

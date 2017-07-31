@@ -20,7 +20,7 @@
 
 static NSString *const cellID = @"cellID";
 
-@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate, MWPhotoBrowserDelegate>
+@interface WXChatDetailController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EMChatManagerDelegate, WXInputViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WXChatCellDelegate, MWPhotoBrowserDelegate, WXMoreInputKeyboardViewDelegate>
 
 @property (weak, nonatomic) UITableView *chatTableView;
 
@@ -142,7 +142,7 @@ static NSString *const cellID = @"cellID";
     
     [self setUpNotification];
     
-    [self moreInputKeyboard];
+    self.moreInputKeyboard.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -289,8 +289,7 @@ static NSString *const cellID = @"cellID";
 }
 
 #pragma mark - WXInputViewDelegate
-- (void)inputView:(WXInputView *)inputView moreBtnDidClickWithStyle:(WXInputViewMoreStyle)style {
-    
+- (void)inputViewMoreBtnDidClick:(WXInputView *)inputView {
     if (self.view.y == 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.view.y = -kWXMoreInputKeyboardViewHeight;
@@ -301,22 +300,19 @@ static NSString *const cellID = @"cellID";
             [UIView animateWithDuration:0.25 animations:^{
                 self.view.y = -kWXMoreInputKeyboardViewHeight;
             }];
+            
         } else {
-            [self.inputView.textField becomeFirstResponder];
+            if (self.inputView.currentInputType == WXInputTypeText) {
+                [self.inputView.textField becomeFirstResponder];
+            } else {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.view.y = 0;
+                }];
+            }
+            
         }
-        
     }
-//    switch (style) {
-//        case WXInputViewMoreStyleImage:
-//        {
-//            UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
-//            pickVC.delegate = self;
-//            [self presentViewController:pickVC animated:YES completion:nil];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
+
 }
 
 - (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status {
@@ -347,7 +343,11 @@ static NSString *const cellID = @"cellID";
             break;
     }
 }
+#pragma mark - WXMoreInputKeyboardViewDelegate
 
+- (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonAtIndex:(NSInteger)index {
+    
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {

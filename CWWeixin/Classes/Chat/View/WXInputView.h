@@ -19,13 +19,17 @@ typedef enum : NSUInteger {
     WXInputVoiceStatusSent,
     WXInputVoiceStatusCancled,
 } WXInputVoiceStatus;
+typedef enum : NSUInteger {
+    WXInputTypeText,
+    WXInputTypeVoice,
+} WXInputType;
 
 @class WXInputView;
 
 @protocol WXInputViewDelegate <NSObject>
 
 @optional
-- (void)inputView:(WXInputView *)inputView moreBtnDidClickWithStyle:(WXInputViewMoreStyle)style;
+- (void)inputViewMoreBtnDidClick:(WXInputView *)inputView;
 - (void)inputView:(WXInputView *)inputView voiceChangeStatus:(WXInputVoiceStatus)status;
 
 @end
@@ -35,6 +39,8 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @property (weak, nonatomic) id<WXInputViewDelegate> delegate;
+
+@property (assign, nonatomic) WXInputType currentInputType;
 
 + (instancetype)inputView;
 

@@ -36,28 +36,31 @@ typedef enum : NSUInteger {
     self.voiceButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.voiceButton.layer.cornerRadius = 5;
     self.voiceButton.layer.masksToBounds = YES;
+    
+    self.currentInputType = WXInputTypeText;
 }
 - (IBAction)emoticonButtonClick:(UIButton *)sender {
     
 }
 
 - (IBAction)moreButtonClick:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(inputView:moreBtnDidClickWithStyle:)]) {
-        [self.delegate inputView:self moreBtnDidClickWithStyle:WXInputViewMoreStyleImage];
+    if ([self.delegate respondsToSelector:@selector(inputViewMoreBtnDidClick:)]) {
+        [self.delegate inputViewMoreBtnDidClick:self];
     }
 }
 - (IBAction)changeInputTypeButtonClick:(UIButton *)sender {
     
     sender.selected = !sender.isSelected;
-    
     self.textField.hidden = sender.isSelected;
-    if (sender.selected) {
+    self.voiceButton.hidden = !sender.isSelected;
+    
+    if (sender.isSelected) {
         [self.textField resignFirstResponder];
     } else {
         [self.textField becomeFirstResponder];
     }
     
-    self.voiceButton.hidden = !sender.isSelected;
+    self.currentInputType = sender.isSelected ? WXInputTypeVoice : WXInputTypeText;
 }
 
 #pragma mark - 语音按钮事件
