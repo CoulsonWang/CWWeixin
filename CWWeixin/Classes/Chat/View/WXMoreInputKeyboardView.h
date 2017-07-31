@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    WXMoreInputTypeImage,
+    WXMoreInputTypeVoiceTalk,
+} WXMoreInputType;
+
 @class WXMoreInputKeyboardView;
 
 @protocol WXMoreInputKeyboardViewDelegate <NSObject>
 
-- (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonAtIndex:(NSInteger)index;
+
+- (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonOfType:(WXMoreInputType)type;
 
 @end
 

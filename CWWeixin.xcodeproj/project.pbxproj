@@ -10,6 +10,7 @@
 		046ABEE7723BCD71268EB1F2 /* libPods-CWWeixin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B56F4BFC49E462EF02D5650 /* libPods-CWWeixin.a */; };
 		B963DF181F2EF27A009D1378 /* WXMoreInputKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */; };
 		B963DF1B1F2EFD83009D1378 /* UIView+CWFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */; };
+		B963DF1E1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B963DF1D1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m */; };
 		B9752F031F2789C700316148 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9752F021F2789C700316148 /* main.m */; };
 		B9752F0C1F2789C700316148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0A1F2789C700316148 /* Main.storyboard */; };
 		B9752F0E1F2789C700316148 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9752F0D1F2789C700316148 /* Assets.xcassets */; };
@@ -56,6 +57,8 @@
 		B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMoreInputKeyboardView.m; sourceTree = "<group>"; };
 		B963DF191F2EFD83009D1378 /* UIView+CWFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CWFrame.h"; sourceTree = "<group>"; };
 		B963DF1A1F2EFD83009D1378 /* UIView+CWFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CWFrame.m"; sourceTree = "<group>"; };
+		B963DF1C1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMoreInputKeyboardButton.h; sourceTree = "<group>"; };
+		B963DF1D1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMoreInputKeyboardButton.m; sourceTree = "<group>"; };
 		B9752EFE1F2789C700316148 /* CWWeixin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWWeixin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9752F021F2789C700316148 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9752F0B1F2789C700316148 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				B9B227F31F2DDE9F00715218 /* WXSessionBadgeView.m */,
 				B963DF161F2EF27A009D1378 /* WXMoreInputKeyboardView.h */,
 				B963DF171F2EF27A009D1378 /* WXMoreInputKeyboardView.m */,
+				B963DF1C1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.h */,
+				B963DF1D1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				B97CDACA1F2A224D004D2185 /* NSString+WXTimestamp.m in Sources */,
 				B9EE023B1F287374002F3075 /* WXNavigationController.m in Sources */,
 				B963DF1B1F2EFD83009D1378 /* UIView+CWFrame.m in Sources */,
+				B963DF1E1F2F1AA3009D1378 /* WXMoreInputKeyboardButton.m in Sources */,
 				B9752F511F279D8500316148 /* AppDelegate.m in Sources */,
 				B9B228031F2E03CA00715218 /* WXGroupItem.m in Sources */,
 				B97CDAC11F2A1D0C004D2185 /* WXChatCell.m in Sources */,

@@ -73,6 +73,7 @@ static NSString *const cellID = @"cellID";
     return _moreInputKeyboard;
 }
 
+
 - (UITableView *)chatTableView {
     if (!_chatTableView) {
         UITableView *chatTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CWScreenW, CWScreenH - kInputViewHeight) style:UITableViewStylePlain];
@@ -345,7 +346,7 @@ static NSString *const cellID = @"cellID";
 }
 #pragma mark - WXMoreInputKeyboardViewDelegate
 
-- (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonAtIndex:(NSInteger)index {
+- (void)moreInputKeyboardView:(WXMoreInputKeyboardView *)moreInputKeyboardView didClickButtonOfType:(WXMoreInputType)type {
     
 }
 

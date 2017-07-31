@@ -7,6 +7,7 @@
 //
 
 #import "WXMoreInputKeyboardView.h"
+#import "WXMoreInputKeyboardButton.h"
 
 @interface WXMoreInputKeyboardView ()
 
@@ -14,17 +15,21 @@
 
 @property (strong, nonatomic) NSMutableArray *buttons;
 
-@property (strong, nonatomic) NSArray *btnTitles;
+@property (strong, nonatomic) NSArray *btnProperties;
 
 @end
 
 @implementation WXMoreInputKeyboardView
 
-- (NSArray *)btnTitles {
-    if (!_btnTitles) {
-        _btnTitles = @[@"图片",@"语音聊天"];
+- (NSArray *)btnProperties {
+    if (!_btnProperties) {
+        _btnProperties = @[@{@"title":@"图片",
+                         @"type":@(WXMoreInputTypeImage)},
+                       @{@"title":@"语音聊天",
+                         @"type":@(WXMoreInputTypeVoiceTalk)},
+                       ];
     }
-    return _btnTitles;
+    return _btnProperties;
 }
 
 - (NSMutableArray *)buttons {
@@ -38,8 +43,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        for (NSString *title in self.btnTitles) {
-            [self setUpOneButtonWithTitle:title];
+        for (NSDictionary *dict in self.btnProperties) {
+            NSNumber *typeNum = dict[@"type"];
+            
+            [self setUpOneButtonWithTitle:dict[@"title"] inputType:typeNum.integerValue];
         }
         self.backgroundColor = [UIColor grayColor];
     }
@@ -71,15 +78,13 @@
     
 }
 
-- (void)setUpOneButtonWithTitle:(NSString *)title {
+- (void)setUpOneButtonWithTitle:(NSString *)title inputType:(WXMoreInputType)inputType {
     
-    static int i = 0;
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    WXMoreInputKeyboardButton *btn = [WXMoreInputKeyboardButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
-    btn.tag = ++i;
+    btn.inputType = inputType;
     [btn addTarget:self action:@selector(moreInputButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.buttons addObject:btn];
@@ -87,8 +92,8 @@
 }
 
 - (void)moreInputButtonClick:(UIButton *)btn {
-    if ([self.delegate respondsToSelector:@selector(moreInputKeyboardView:didClickButtonAtIndex:)]) {
-        [self.delegate moreInputKeyboardView:self didClickButtonAtIndex:btn.tag];
+    if ([self.delegate respondsToSelector:@selector(moreInputKeyboardView:didClickButtonOfType:)]) {
+        
     }
 }
 
